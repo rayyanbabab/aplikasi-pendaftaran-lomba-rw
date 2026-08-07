@@ -56,8 +56,8 @@ export default async function BuktiPage({
     color: { dark: "#1a0a0a", light: "#ffffff" },
   });
 
-  const eventDateStr = event?.date
-    ? new Date(event.date).toLocaleDateString("id-ID", {
+  const eventDateStr = event?.eventDate
+    ? new Date(event.eventDate).toLocaleDateString("id-ID", {
         weekday: "long",
         day: "numeric",
         month: "long",
