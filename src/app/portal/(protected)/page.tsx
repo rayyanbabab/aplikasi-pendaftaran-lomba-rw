@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata = {
   title: "Ringkasan Statistik & Operasional",
-  description: "Rekapitulasi pendaftaran lomba dan verifikasi warga RT 04.",
+  description: "Rekapitulasi pendaftaran lomba dan verifikasi warga RW 10.",
 };
 
 export default async function AdminDashboard() {
@@ -112,12 +112,12 @@ export default async function AdminDashboard() {
             Dasbor Panitia HUT RI ke-81
           </h1>
           <p className="text-sm text-muted-foreground leading-normal">
-            Pantau arus pendaftaran, validasi berkas warga, dan rekap kehadiran hari pelaksanaan lomba di RT 04.
+            Pantau arus pendaftaran, validasi berkas warga, dan rekap kehadiran hari pelaksanaan lomba di RW 10.
           </p>
           <div className="flex flex-wrap items-center gap-5 pt-1 text-xs font-medium text-muted-foreground">
             <span className="flex items-center gap-1.5 text-foreground">
               <MapPin className="h-3.5 w-3.5 text-primary shrink-0" />
-              Jl. Pengasinan Tengah RT 04
+              Jl. Pengasinan Tengah RW 10
             </span>
             <span className="flex items-center gap-1.5 text-foreground">
               <Calendar className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-500 shrink-0" />

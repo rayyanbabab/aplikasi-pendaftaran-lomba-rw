@@ -30,12 +30,12 @@ export function SiteFooter() {
               <div>
                 <h2 className="text-2xl font-black tracking-tight">Semarak 17-an</h2>
                 <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
-                  RT 04 Community
+                  RW 10 Community
                 </p>
               </div>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-              Wadah silaturahmi dan perayaan kemerdekaan bagi seluruh warga RT 04.
+              Wadah silaturahmi dan perayaan kemerdekaan bagi seluruh warga RW 10.
               Mari bersatu, bergembira, dan rayakan semangat Merah Putih bersama.
             </p>
             <div className="flex gap-3">
@@ -73,7 +73,7 @@ export function SiteFooter() {
               <li className="flex gap-4">
                 <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                 <span className="leading-relaxed">
-                  Jl. Pengasinan Tengah RT 04 Depan Masjid Nurul Huda
+                  Jl. Pengasinan Tengah RW 10 Depan Masjid Nurul Huda
                 </span>
               </li>
               <li className="flex gap-4">

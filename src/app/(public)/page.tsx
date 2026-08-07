@@ -72,9 +72,9 @@ const scheduleItems = [
 
 const rules = [
   {
-    title: "Khusus Warga RT 04",
+    title: "Khusus Warga RW 10",
     description:
-      "Perlombaan diperuntukkan bagi warga RT 04 yang berdomisili atau tercatat dalam data RT. Siapkan KTP atau KK saat melakukan pendaftaran.",
+      "Perlombaan diperuntukkan bagi warga RW 10 yang berdomisili atau tercatat dalam data RT. Siapkan KTP atau KK saat melakukan pendaftaran.",
     icon: UserCheck,
   },
   {
@@ -95,7 +95,7 @@ const faqs = [
   {
     question: "Apakah dikenakan biaya untuk mengikuti lomba?",
     answer:
-      "Seluruh perlombaan diselenggarakan tanpa biaya pendaftaran (gratis), dibiayai oleh kas kegiatan HUT RI Ke-81 RT 04.",
+      "Seluruh perlombaan diselenggarakan tanpa biaya pendaftaran (gratis), dibiayai oleh kas kegiatan HUT RI Ke-81 RW 10.",
     open: true,
   },
   {
@@ -192,7 +192,7 @@ export default async function LandingPage() {
     const countSuffix = isTeam ? " Tim" : " Peserta";
     const description = competition.name
       ? `Perlombaan sistem ${isTeam ? "beregu (tim)" : "perorangan"}. Daftar segera sebelum kuota terpenuhi.`
-      : "Perlombaan kemerdekaan tahunan bagi warga RT 04.";
+      : "Perlombaan kemerdekaan tahunan bagi warga RW 10.";
 
     return {
       id: competition.id,
@@ -223,10 +223,10 @@ export default async function LandingPage() {
                   HUT RI KE-81 &bull; TAHUN 2026
                 </div>
                 <h1 className="animate-fade-in text-3xl sm:text-5xl font-black leading-[1.15] sm:leading-[1.1] tracking-tight text-white md:text-6xl lg:text-7xl">
-                  Pesta Rakyat <span className="text-[#ff4242]">17 Agustus</span> RT 04
+                  Pesta Rakyat <span className="text-[#ff4242]">17 Agustus</span> RW 10
                 </h1>
                 <p className="animate-fade-in delay-100 mx-auto max-w-2xl text-base font-normal leading-relaxed text-neutral-300 sm:text-lg md:text-xl">
-                  Sambut hari kemerdekaan Indonesia bersama seluruh warga RT 04.
+                  Sambut hari kemerdekaan Indonesia bersama seluruh warga RW 10.
                   Daftarkan diri atau timmu untuk mengikuti rangkaian kegiatan dan
                   perlombaan tahunan ini.
                 </p>
@@ -279,7 +279,7 @@ export default async function LandingPage() {
             Rangkaian Acara 17-an
           </h2>
           <p className="mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground">
-            Seluruh kegiatan dipusatkan di lingkungan RT 04. Warga diimbau mencatat waktu pelaksanaan dan hadir sesuai agenda.
+            Seluruh kegiatan dipusatkan di lingkungan RW 10. Warga diimbau mencatat waktu pelaksanaan dan hadir sesuai agenda.
           </p>
         </div>
         {/* Mobile Timeline View (< 768px) */}
@@ -375,7 +375,7 @@ export default async function LandingPage() {
             Persyaratan Lomba
           </h2>
           <p className="mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground">
-            Panduan umum bagi seluruh warga RT 04 yang berpartisipasi dalam perayaan peringatan kemerdekaan.
+            Panduan umum bagi seluruh warga RW 10 yang berpartisipasi dalam perayaan peringatan kemerdekaan.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 md:grid-cols-3">
@@ -457,13 +457,13 @@ export default async function LandingPage() {
           <div className="relative z-20 mx-auto max-w-2xl space-y-5 sm:space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 sm:px-5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-[0.15em] text-white backdrop-blur-md">
               <Flag className="h-3.5 w-3.5 text-[#ee2b2b] sm:h-4 sm:w-4" />
-              GUYUB RUKUN &bull; RT 04
+              GUYUB RUKUN &bull; RW 10
             </div>
             <h2 className="text-3xl sm:text-4xl font-black leading-[1.15] sm:leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl">
               Mari Ramaikan &amp; Bersatu<br className="hidden sm:block" /> Dalam Peringatan HUT RI
             </h2>
             <p className="text-base sm:text-lg leading-relaxed text-neutral-200">
-              Pendaftaran terbuka bagi seluruh keluarga besar RT 04. Pilihlah kategori perlombaan kegemaran Anda dan daftarkan nama sekarang juga.
+              Pendaftaran terbuka bagi seluruh keluarga besar RW 10. Pilihlah kategori perlombaan kegemaran Anda dan daftarkan nama sekarang juga.
             </p>
             <div className="flex flex-col items-center justify-center gap-3.5 sm:gap-4 pt-4 sm:flex-row">
               <Button

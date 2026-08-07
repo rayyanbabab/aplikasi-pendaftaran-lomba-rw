@@ -4,7 +4,7 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const imageUrl = searchParams.get("url");
-    const filename = searchParams.get("filename") || "HUTRI81_RT04_Foto.jpg";
+    const filename = searchParams.get("filename") || "HUTRI81_RW10_Foto.jpg";
 
     if (!imageUrl) {
       return NextResponse.json({ error: "URL gambar tidak ditemukan" }, { status: 400 });

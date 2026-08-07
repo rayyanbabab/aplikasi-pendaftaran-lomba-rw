@@ -1,4 +1,4 @@
-const CACHE_NAME = 'semarak-rt04-v1';
+const CACHE_NAME = 'semarak-rw10-v1';
 const STATIC_ASSETS = [
   '/',
   '/logo-hutri-81.png',

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 
 export const metadata = {
   title: "Manajemen Akun User & Panitia",
-  description: "Kelola akun panitia dan pengelola perlombaan HUT RI ke-81 RT 04.",
+  description: "Kelola akun panitia dan pengelola perlombaan HUT RI ke-81 RW 10.",
 };
 
 export default async function AdminUsersPage() {

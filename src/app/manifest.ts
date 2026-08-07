@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "RT04: HUTRI KE 81",
-    short_name: "RT04: HUTRI KE 81",
-    description: "Portal resmi pendaftaran, informasi lomba, dan verifikasi check-in warga perayaan HUT Kemerdekaan RI ke-81 di RT 04.",
+    name: "RW10: HUTRI KE 81",
+    short_name: "RW10: HUTRI KE 81",
+    description: "Portal resmi pendaftaran, informasi lomba, dan verifikasi check-in warga perayaan HUT Kemerdekaan RI ke-81 di RW 10.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

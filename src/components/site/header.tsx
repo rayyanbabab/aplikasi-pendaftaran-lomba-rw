@@ -14,7 +14,7 @@ export function SiteHeader() {
           <div className="min-w-0 truncate">
             <p className="text-base sm:text-lg font-extrabold leading-tight tracking-tight truncate">Semarak 17-an</p>
             <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] text-primary truncate">
-              RT 04 &middot; Agustusan 2026
+              RW 10 &middot; Agustusan 2026
             </p>
           </div>
         </Link>

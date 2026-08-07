@@ -47,7 +47,7 @@ export function AdminLoginForm() {
         toast.error(result.error || "Login gagal. Periksa kembali kredensial Anda.");
         return;
       }
-      toast.success("Selamat datang di Portal Panitia & Admin RT 04!");
+      toast.success("Selamat datang di Portal Panitia & Admin RW 10!");
       router.push("/portal");
     });
   };
@@ -88,7 +88,7 @@ export function AdminLoginForm() {
             <div>
               <span className="text-2xl font-black tracking-tight block leading-tight">Semarak 17-an</span>
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-300 block">
-                RT 04 &middot; Agustusan 2026
+                RW 10 &middot; Agustusan 2026
               </span>
             </div>
           </div>
@@ -98,7 +98,7 @@ export function AdminLoginForm() {
               Pusat Kendali Semarak Kemerdekaan.
             </h1>
             <p className="text-base sm:text-lg font-normal leading-relaxed text-neutral-200">
-              Sistem pendataan terpadu untuk pencatatan peserta lomba, pengelolaan jadwal, serta pendataan pemenang lomba bagi seluruh warga RT 04.
+              Sistem pendataan terpadu untuk pencatatan peserta lomba, pengelolaan jadwal, serta pendataan pemenang lomba bagi seluruh warga RW 10.
             </p>
           </div>
 

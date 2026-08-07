@@ -4,9 +4,9 @@ import { eq, inArray, sql } from "drizzle-orm";
 import { DaftarCatalog, type DaftarCatalogItem } from "@/components/site/daftar-catalog";
 
 export const metadata = {
-  title: "Semua Lomba & Pendaftaran Resmi RT 04",
+  title: "Semua Lomba & Pendaftaran Resmi RW 10",
   description:
-    "Katalog lengkap seluruh cabang perlombaan HUT RI ke-81 di lingkungan RT 04. Daftarkan diri secara cepat dan gratis tanpa akun.",
+    "Katalog lengkap seluruh cabang perlombaan HUT RI ke-81 di lingkungan RW 10. Daftarkan diri secara cepat dan gratis tanpa akun.",
 };
 
 const fallbackImages = [
@@ -83,7 +83,7 @@ export default async function DaftarPage() {
         { id: 101, name: "Balap Karung Helmet Junior", type: "SOLO", quotaTotal: 50, currentCount: 42, eventId: 1, maxParticipants: 50 },
         { id: 102, name: "Makan Kerupuk Gila Bergantung", type: "SOLO", quotaTotal: 80, currentCount: 65, eventId: 1, maxParticipants: 80 },
         { id: 103, name: "Tarik Tambang Antar Blok RT", type: "TEAM", quotaTotal: 16, currentCount: 12, eventId: 1, maxParticipants: 16 },
-        { id: 104, name: "Panjat Pinang Makmur RT 04", type: "TEAM", quotaTotal: 8, currentCount: 6, eventId: 1, maxParticipants: 8 },
+        { id: 104, name: "Panjat Pinang Makmur RW 10", type: "TEAM", quotaTotal: 8, currentCount: 6, eventId: 1, maxParticipants: 8 },
         { id: 105, name: "Lari Kelereng Dalam Sendok", type: "SOLO", quotaTotal: 40, currentCount: 28, eventId: 1, maxParticipants: 40 },
         { id: 106, name: "Balap Bakiak Estafet Warga", type: "TEAM", quotaTotal: 12, currentCount: 9, eventId: 1, maxParticipants: 12 },
       ];

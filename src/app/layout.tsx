@@ -24,11 +24,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Semarak 17-an RT 04",
-    default: "Semarak 17-an RT 04 | Portal Resmi Pendaftaran Lomba HUT RI ke-81",
+    template: "%s | Semarak 17-an RW 10",
+    default: "Semarak 17-an RW 10 | Portal Resmi Pendaftaran Lomba HUT RI ke-81",
   },
   description:
-    "Portal resmi pendaftaran dan informasi lomba perayaan HUT Kemerdekaan RI ke-81 di RT 04. Mudah, transparan, dan terstruktur untuk seluruh warga!",
+    "Portal resmi pendaftaran dan informasi lomba perayaan HUT Kemerdekaan RI ke-81 di RW 10. Mudah, transparan, dan terstruktur untuk seluruh warga!",
   icons: {
     icon: "/logo-hutri-81.png",
     shortcut: "/logo-hutri-81.png",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "RT04: HUTRI KE 81",
+    title: "RW10: HUTRI KE 81",
   },
 };
 

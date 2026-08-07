@@ -70,7 +70,7 @@ export default async function RegisterPage({
                   {competition.name}
                 </h1>
                 <p className="mt-2 text-xs text-white/90 font-normal leading-relaxed">
-                  Pendaftaran resmi perayaan HUT RI ke-81 di lingkungan RT 04. Kuota pendaftaran diatur demi ketertiban dan kemeriahan acara.
+                  Pendaftaran resmi perayaan HUT RI ke-81 di lingkungan RW 10. Kuota pendaftaran diatur demi ketertiban dan kemeriahan acara.
                 </p>
               </div>
 
@@ -94,7 +94,7 @@ export default async function RegisterPage({
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Lokasi Perlombaan</p>
                     <p className="font-bold text-foreground text-sm mt-0.5">
-                      {event ? event.location : "Jl. Pengasinan Tengah RT 04 (Masjid Nurul Huda)"}
+                      {event ? event.location : "Jl. Pengasinan Tengah RW 10 (Masjid Nurul Huda)"}
                     </p>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export default async function RegisterPage({
               <ul className="space-y-3 text-xs leading-relaxed text-foreground/80 font-normal">
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-500 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Identitas Valid:</strong> Pastikan nama yang didaftarkan sesuai dengan data KTP atau Kartu Keluarga warga RT 04.</span>
+                  <span><strong className="text-foreground font-semibold">Identitas Valid:</strong> Pastikan nama yang didaftarkan sesuai dengan data KTP atau Kartu Keluarga warga RW 10.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-500 mt-0.5" />

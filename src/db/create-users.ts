@@ -12,7 +12,7 @@ async function createAccounts() {
   await db.insert(user).values({
     id: adminId,
     name: "Admin Utama",
-    email: "admin@rt04.id",
+    email: "admin@RW10.id",
     role: "ADMIN",
     emailVerified: true,
     createdAt: new Date(),
@@ -30,7 +30,7 @@ async function createAccounts() {
   });
 
   console.log("=== ADMIN ACCOUNT CREATED ===");
-  console.log("Email: admin@rt04.id");
+  console.log("Email: admin@RW10.id");
   console.log("Password: " + adminPassword);
   console.log("=============================\n");
 
@@ -43,7 +43,7 @@ async function createAccounts() {
   await db.insert(user).values({
     id: panitiaId,
     name: "Panitia Lomba",
-    email: "panitia@rt04.id",
+    email: "panitia@RW10.id",
     role: "PANITIA",
     emailVerified: true,
     createdAt: new Date(),
@@ -61,7 +61,7 @@ async function createAccounts() {
   });
 
   console.log("=== PANITIA ACCOUNT CREATED ===");
-  console.log("Email: panitia@rt04.id");
+  console.log("Email: panitia@RW10.id");
   console.log("Password: " + panitiaPassword);
   console.log("===============================");
 }

@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="./public/logo-hutri-81.png" alt="Logo HUT RI ke-81 RT 04" height="90" onerror="this.style.display='none'" />
-  <h1>🇮🇩 PORTAL SEMARAK 17-AN RT 04 🇮🇩</h1>
+  <img src="./public/logo-hutri-81.png" alt="Logo HUT RI ke-81 RW 10" height="90" onerror="this.style.display='none'" />
+  <h1>🇮🇩 PORTAL SEMARAK 17-AN RW 10 🇮🇩</h1>
   <p><strong>Platform Resmi Pendaftaran Perlombaan, Check-In Digital & Galeri Dokumentasi Momen HUT RI Ke-81</strong></p>
   
   <p>
@@ -16,7 +16,7 @@
 
 ## 🌟 Tentang Proyek & Filosofi Desain ("Anti-Slop")
 
-**Portal Semarak 17-an RT 04** adalah aplikasi web berkinerja tinggi (*high-performance web architecture*) yang dirancang khusus untuk memodernisasi tradisi tahunan perayaan Hari Ulang Tahun Kemerdekaan Republik Indonesia (HUT RI) ke-81 di lingkungan RT 04.
+**Portal Semarak 17-an RW 10** adalah aplikasi web berkinerja tinggi (*high-performance web architecture*) yang dirancang khusus untuk memodernisasi tradisi tahunan perayaan Hari Ulang Tahun Kemerdekaan Republik Indonesia (HUT RI) ke-81 di lingkungan RW 10.
 
 Menggunakan filosofi desain **"Anti-Slop"**, sistem ini menolak ketidakteraturan, tampilan berantakan, serta proses manual yang rumit. Proyek ini memadukan estetika kelas dunia, interaktivitas modern 60-FPS, dan kemudahan penggunaan luar biasa baik bagi **Warga / Peserta Lomba** maupun bagi tim **Panitia / Admin Pengelola**.
 
@@ -139,9 +139,9 @@ Portal ini menggunakan sistem pendaftaran administrator berbasis antarmuka web i
 
 1. Sambungkan repositori GitHub **`YsrnDev/pendaftaran-lomba`** ke akun platform hosting modern kesukaan Anda (seperti [Vercel](https://vercel.com/) atau Railway / Render).
 2. Tambahkan variabel lingkungan wajib (`DATABASE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `BETTER_AUTH_SECRET`, dan `BETTER_AUTH_URL` sesuai domain online Anda) pada Dasbor Cloud Settings.
-3. Jalankan command build `pnpm build`, maka persembahan karya istimewa Semarak 17-an RT 04 ini akan seketika menyala membanggakan warga di pentas digital internet! 🇮🇩✨🔥
+3. Jalankan command build `pnpm build`, maka persembahan karya istimewa Semarak 17-an RW 10 ini akan seketika menyala membanggakan warga di pentas digital internet! 🇮🇩✨🔥
 
 ---
 <div align="center">
-  <p>Dibuat dengan semangat kemerdekaan dan kebanggaan 100% dari, oleh, dan untuk <strong>Warga RT 04</strong>. 🏆🇮🇩</p>
+  <p>Dibuat dengan semangat kemerdekaan dan kebanggaan 100% dari, oleh, dan untuk <strong>Warga RW 10</strong>. 🏆🇮🇩</p>
 </div>

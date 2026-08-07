@@ -5,8 +5,8 @@ import { db } from "@/db";
 import { competitions, galleryPhotos, events } from "@/db/schema";
 
 export const metadata = {
-  title: "Galeri Momen Semarak 17-an RT 04",
-  description: "Arsip dokumentasi dan kemeriahan warga RT 04 dalam perlombaan Hari Kemerdekaan Republik Indonesia ke-81.",
+  title: "Galeri Momen Semarak 17-an RW 10",
+  description: "Arsip dokumentasi dan kemeriahan warga RW 10 dalam perlombaan Hari Kemerdekaan Republik Indonesia ke-81.",
 };
 
 const fallbackGalleryItems: PublicGalleryItem[] = [
@@ -68,10 +68,10 @@ const fallbackGalleryItems: PublicGalleryItem[] = [
   },
   {
     src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBOLW6dYMxiaL8V6m0KBtpcJlFCbMBKG3Hr4HkzROaKsrrYNqeqJ3OIfzgpxhDZjmyaqqyhjuUoJ4b3PfN5Z7f0OY6hYt37Grkp6JiISLceXslvzk_DHHTWmRuOtaeOHdWA_AUtGzs_2ozo0hG5XDOHmle1dolzBbXhwzC0dXjC0rBRX6xfrq2ldtKz_htBT0zbwihJGHri13nzrF9Um66fXS9Gd2bpMqi_yoY21ggg0WwtTNnx8u4n6mmH0gEA2Lq6qhmfkIdZ_M65",
-    alt: "Senyum bangga segenap panitia karang taruna dan pengurus RT 04 setelah sukses mengadakan acara.",
+    alt: "Senyum bangga segenap panitia karang taruna dan pengurus RW 10 setelah sukses mengadakan acara.",
     categoryId: "general",
     categoryLabel: "Momen Warga",
-    title: "Panitia & Karang Taruna RT 04",
+    title: "Panitia & Karang Taruna RW 10",
     year: "2025",
   },
   {

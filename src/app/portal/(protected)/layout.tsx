@@ -9,7 +9,7 @@ import { requireAdmin } from "@/lib/auth";
 export const metadata: Metadata = {
   title: {
     template: "%s | Dasbor Panitia & Admin",
-    default: "Dasbor Utama | Semarak 17-an RT 04",
+    default: "Dasbor Utama | Semarak 17-an RW 10",
   },
 };
 

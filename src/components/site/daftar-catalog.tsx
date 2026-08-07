@@ -53,7 +53,7 @@ export function DaftarCatalog({ items }: DaftarCatalogProps) {
       <section className="mb-12 text-center sm:mb-16">
         <div className="animate-fade-in-down mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-5 py-2 text-xs font-black uppercase tracking-widest text-primary shadow-xs">
           <Trophy className="h-4 w-4 text-amber-500" />
-          Pusat Pendaftaran Resmi RT 04
+          Pusat Pendaftaran Resmi RW 10
         </div>
         <h1 className="animate-fade-in-up text-4xl font-black tracking-tight text-foreground sm:text-5xl md:text-6xl">
           Katalog Semua <span className="text-[#ee2b2b]">Lomba 17-an</span>
@@ -111,7 +111,7 @@ export function DaftarCatalog({ items }: DaftarCatalogProps) {
           <Trophy className="mx-auto h-12 w-12 opacity-40 text-primary" />
           <p className="text-base font-bold text-foreground">Belum ada daftar lomba pada kategori ini</p>
           <p className="text-xs max-w-sm mx-auto text-muted-foreground">
-            Cabang kompetisi baru sedang diatur oleh pengurus dan tim panitia RT 04.
+            Cabang kompetisi baru sedang diatur oleh pengurus dan tim panitia RW 10.
           </p>
         </div>
       ) : (
@@ -194,7 +194,7 @@ export function DaftarCatalog({ items }: DaftarCatalogProps) {
             3 Langkah Daftar Cepat Tanpa Ribet
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            Portal Semarak 17-an RT 04 membebaskan Anda dari kerepotan registrasi akun atau password. Semua dibuat langsung jadi dan otomatis tervalidasi!
+            Portal Semarak 17-an RW 10 membebaskan Anda dari kerepotan registrasi akun atau password. Semua dibuat langsung jadi dan otomatis tervalidasi!
           </p>
         </div>
 
@@ -242,7 +242,7 @@ export function DaftarCatalog({ items }: DaftarCatalogProps) {
             <span>Pendaftaran Tutup: <strong className="text-foreground">16 Agustus 2026 Pukul 22:00 WIB</strong></span>
           </div>
           <span className="text-primary font-extrabold uppercase tracking-widest">
-            DIRGAHAYU REPUBLIK INDONESIA KE-81 &bull; RT 04
+            DIRGAHAYU REPUBLIK INDONESIA KE-81 &bull; RW 10
           </span>
         </div>
       </section>

@@ -76,7 +76,7 @@ export function SetupAdminForm() {
               <Sparkles className="h-5 w-5 text-yellow-300 animate-pulse" />
             </div>
             <div>
-              <span className="text-2xl font-black tracking-tight block">Inisiasi Sistem RT 04</span>
+              <span className="text-2xl font-black tracking-tight block">Inisiasi Sistem RW 10</span>
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 block">Setup Administrator Pertama</span>
             </div>
           </div>
@@ -90,7 +90,7 @@ export function SetupAdminForm() {
             </p>
           </div>
           <div className="text-sm font-medium opacity-70">
-            {"\u00A9"} 2026 Panitia HUT RI ke-81 RT 04. Hak Cipta Dilindungi.
+            {"\u00A9"} 2026 Panitia HUT RI ke-81 RW 10. Hak Cipta Dilindungi.
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ export function SetupAdminForm() {
               Buat Akun Administrator
             </h2>
             <p className={cn("text-base font-normal", isDark ? "text-gray-400" : "text-[#9a4c4c]")}>
-              Lengkapi kredensial berikut untuk mendirikan hak akses tertinggi di sistem RT 04 ini.
+              Lengkapi kredensial berikut untuk mendirikan hak akses tertinggi di sistem RW 10 ini.
             </p>
           </div>
 
@@ -158,7 +158,7 @@ export function SetupAdminForm() {
               </label>
               <input
                 type="email"
-                placeholder="Contoh: admin.rt04@gmail.com"
+                placeholder="Contoh: admin.RW10@gmail.com"
                 className={cn(
                   "h-14 w-full rounded-xl border p-4 text-base transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15",
                   isDark
@@ -243,7 +243,7 @@ export function SetupAdminForm() {
             )}
           >
             <UserCheck className="h-4 w-4 text-primary" />
-            RT 04 Automated Initial Bootstrap
+            RW 10 Automated Initial Bootstrap
           </div>
         </div>
       </div>

@@ -123,7 +123,7 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
             Registrasi Digital &middot; Tanpa Akun
           </span>
           <span className="text-[11px] font-extrabold text-muted-foreground tracking-widest uppercase">
-            HUT RI KE-81 &bull; RT 04
+            HUT RI KE-81 &bull; RW 10
           </span>
         </div>
         <CardTitle className="mt-3 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
@@ -225,7 +225,7 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
               </div>
             </div>
             <p className="text-xs text-foreground/80 font-medium pt-0.5">
-              *Nomor WhatsApp ini digunakan untuk menerima E-Ticket bukti pendaftaran dan pengingat jadwal dari panitia RT 04.
+              *Nomor WhatsApp ini digunakan untuk menerima E-Ticket bukti pendaftaran dan pengingat jadwal dari panitia RW 10.
             </p>
           </div>
 

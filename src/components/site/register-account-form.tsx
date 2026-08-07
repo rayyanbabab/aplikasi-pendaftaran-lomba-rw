@@ -91,7 +91,7 @@ export function RegisterAccountForm() {
             <div>
               <span className="text-2xl font-black tracking-tight block leading-tight">Semarak 17-an</span>
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-300 block">
-                RT 04 &middot; Agustusan 2026
+                RW 10 &middot; Agustusan 2026
               </span>
             </div>
           </div>
@@ -105,7 +105,7 @@ export function RegisterAccountForm() {
               Bergabung Menjadi Panitia Lomba.
             </h1>
             <p className="text-base sm:text-lg font-normal leading-relaxed text-neutral-200">
-              Buat akun Anda sekarang untuk membantu pengelolaan pendaftaran, pencatatan skor, dan verifikasi peserta perlombaan RT 04.
+              Buat akun Anda sekarang untuk membantu pengelolaan pendaftaran, pencatatan skor, dan verifikasi peserta perlombaan RW 10.
             </p>
           </div>
 
@@ -176,7 +176,7 @@ export function RegisterAccountForm() {
               </label>
               <input
                 type="text"
-                placeholder="Contoh: budi_rt04"
+                placeholder="Contoh: budi_RW10"
                 className={cn(
                   "h-13 w-full rounded-xl border p-4 text-base transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15",
                   isDark

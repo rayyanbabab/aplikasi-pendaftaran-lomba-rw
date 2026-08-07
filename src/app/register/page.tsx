@@ -4,7 +4,7 @@ import { getSession } from "@/lib/auth";
 
 export const metadata = {
   title: "Buat Akun Panitia & Admin",
-  description: "Halaman pendaftaran akun pengelola perlombaan HUT RI ke-81 RT 04.",
+  description: "Halaman pendaftaran akun pengelola perlombaan HUT RI ke-81 RW 10.",
 };
 
 export default async function RegisterPage() {

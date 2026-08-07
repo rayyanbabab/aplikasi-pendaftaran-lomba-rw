@@ -18,7 +18,7 @@ export async function signUpUser(input: unknown) {
   }
 
   const cleanUsername = parsed.data.username.toLowerCase().trim().replace(/@.*$/, "");
-  const email = `${cleanUsername}@rt04.id`;
+  const email = `${cleanUsername}@RW10.id`;
 
   // Cek apakah username/email sudah terdaftar
   const existing = await db
@@ -79,7 +79,7 @@ export async function adminSignIn(input: unknown) {
 
   let email = parsed.data.email.toLowerCase().trim();
   if (!email.includes("@")) {
-    email = `${email}@rt04.id`;
+    email = `${email}@RW10.id`;
   }
 
   const existing = await db

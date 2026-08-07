@@ -38,7 +38,7 @@ export async function createUserAccount(input: unknown) {
     }
 
     const cleanUsername = parsed.data.username.toLowerCase().trim().replace(/@.*$/, "");
-    const email = `${cleanUsername}@rt04.id`;
+    const email = `${cleanUsername}@RW10.id`;
 
     // Cek apakah email/username tersebut sudah digunakan
     const existing = await db
@@ -48,7 +48,7 @@ export async function createUserAccount(input: unknown) {
       .limit(1);
 
     if (existing.length > 0) {
-      return { ok: false, error: `Username "${cleanUsername}" (@rt04.id) sudah terdaftar pada database!` };
+      return { ok: false, error: `Username "${cleanUsername}" (@RW10.id) sudah terdaftar pada database!` };
     }
 
     // Menggunakan kriptografi internal better-auth agar kompatibel dan tidak meremot cookie

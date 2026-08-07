@@ -13,7 +13,7 @@ async function seed() {
     await db
       .update(events)
       .set({
-        location: "Jl. Pengasinan Tengah RT 04 Depan Masjid Nurul Huda",
+        location: "Jl. Pengasinan Tengah RW 10 Depan Masjid Nurul Huda",
         eventDate: "2026-08-17",
       })
       .where(eq(events.name, "Pesta Rakyat 17 Agustus"));
@@ -25,7 +25,7 @@ async function seed() {
     .insert(events)
     .values({
       name: "Pesta Rakyat 17 Agustus",
-      location: "Jl. Pengasinan Tengah RT 04 Depan Masjid Nurul Huda",
+      location: "Jl. Pengasinan Tengah RW 10 Depan Masjid Nurul Huda",
       eventDate: "2026-08-17",
       isOpen: true,
     })

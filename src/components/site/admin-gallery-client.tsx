@@ -221,7 +221,7 @@ export function AdminGalleryClient({
         return;
       }
 
-      toast.success("Foto berhasil diunggah ke Galeri RT 04.");
+      toast.success("Foto berhasil diunggah ke Galeri RW 10.");
       setIsOpenAdd(false);
       resetForm();
       router.refresh();
@@ -291,7 +291,7 @@ export function AdminGalleryClient({
             Manajemen Galeri & Foto
           </h1>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-            Kelola arsip dokumentasi lomba, foto kemeriahan warga, serta penayangan momen di galeri publik RT 04.
+            Kelola arsip dokumentasi lomba, foto kemeriahan warga, serta penayangan momen di galeri publik RW 10.
           </p>
         </div>
 
@@ -478,7 +478,7 @@ export function AdminGalleryClient({
                   </button>
                 </div>
                 <CardDescription className="mt-1 font-medium">
-                  {editTarget ? "Sesuaikan judul, deskripsi, atau ganti gambar dokumentasi di bawah ini." : "Lengkapi data dokumentasi dan unggah foto perayaan warga RT 04."}
+                  {editTarget ? "Sesuaikan judul, deskripsi, atau ganti gambar dokumentasi di bawah ini." : "Lengkapi data dokumentasi dan unggah foto perayaan warga RW 10."}
                 </CardDescription>
               </CardHeader>
 

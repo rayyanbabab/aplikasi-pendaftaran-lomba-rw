@@ -7,7 +7,7 @@ import { user } from "@/db/schema";
 
 export const metadata = {
   title: "Inisialisasi Akun Admin",
-  description: "Inisiasi akun administrator pertama pada database baru Pendaftaran Lomba RT 04.",
+  description: "Inisiasi akun administrator pertama pada database baru Pendaftaran Lomba RW 10.",
 };
 
 export default async function SetupPage() {

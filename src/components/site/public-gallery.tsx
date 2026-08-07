@@ -48,7 +48,7 @@ export function PublicGallery({
     e.stopPropagation();
     try {
       const cleanTitle = title.replace(/[^a-zA-Z0-9]/g, "_") || "Momen_HUTRI_81";
-      const filename = `HUTRI81_RT04_${cleanTitle}.jpg`;
+      const filename = `HUTRI81_RW10_${cleanTitle}.jpg`;
 
       if (src.startsWith("data:")) {
         const link = document.createElement("a");
@@ -86,13 +86,13 @@ export function PublicGallery({
         <section className="mb-14 text-center">
           <div className="animate-fade-in-down mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-5 py-2 text-xs font-black uppercase tracking-wider text-primary shadow-xs">
             <Camera className="h-4 w-4" />
-            Arsip & Dokumentasi RT 04
+            Arsip & Dokumentasi RW 10
           </div>
           <h1 className="animate-fade-in-up text-4xl font-black tracking-tight text-foreground md:text-6xl">
             Galeri Momen <span className="text-[#ee2b2b]">Semarak 17-an</span>
           </h1>
           <p className="animate-fade-in-up delay-100 mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Saksikan kembali senyuman, tawa, dan kekompakan tak terlupakan warga RT 04 saat merayakan kemerdekaan Indonesia.
+            Saksikan kembali senyuman, tawa, dan kekompakan tak terlupakan warga RW 10 saat merayakan kemerdekaan Indonesia.
           </p>
 
           {/* Interaksi Category Filter Bar */}

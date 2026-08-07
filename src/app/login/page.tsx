@@ -8,7 +8,7 @@ import { getSession } from "@/lib/auth";
 
 export const metadata = {
   title: "Login Panitia & Admin",
-  description: "Portal masuk untuk pengelolaan data dan perlombaan HUT RI ke-81 RT 04.",
+  description: "Portal masuk untuk pengelolaan data dan perlombaan HUT RI ke-81 RW 10.",
 };
 
 export default async function LoginPage() {

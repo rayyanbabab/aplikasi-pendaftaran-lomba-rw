@@ -81,7 +81,7 @@ export function UserManagementClient({
         toast.error(result.error || "Gagal membuat akun.");
         return;
       }
-      toast.success(`🎉 Akun Panitia "${values.username.toLowerCase()}@rt04.id" berhasil didaftarkan!`);
+      toast.success(`🎉 Akun Panitia "${values.username.toLowerCase()}@RW10.id" berhasil didaftarkan!`);
       form.reset({ name: "", username: "", password: "", role: "PANITIA" });
       setShowForm(false);
     });
@@ -133,7 +133,7 @@ export function UserManagementClient({
             Manajemen Akun & Panitia
           </h1>
           <p className="mt-1 text-sm font-medium text-muted-foreground">
-            Pusat kendali staf perlombaan HUT RI ke-81 RT 04. Akun yang ditambahkan di bawah berwenang sebagai Panitia.
+            Pusat kendali staf perlombaan HUT RI ke-81 RW 10. Akun yang ditambahkan di bawah berwenang sebagai Panitia.
           </p>
         </div>
         <Button
@@ -158,7 +158,7 @@ export function UserManagementClient({
               <Sparkles className="h-5 w-5 text-primary" /> Daftarkan Anggota Panitia Baru
             </CardTitle>
             <CardDescription>
-              Cukup ketikian nama pendek panitia (Tanpa spasi). Sistem akan menyematkan akhiran @rt04.id secara otomatis.
+              Cukup ketikian nama pendek panitia (Tanpa spasi). Sistem akan menyematkan akhiran @RW10.id secara otomatis.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -187,7 +187,7 @@ export function UserManagementClient({
                       {...form.register("username")}
                     />
                     <span className="pointer-events-none absolute right-2.5 rounded-lg bg-muted px-2.5 py-1 text-xs font-black tracking-wider text-muted-foreground border border-border/80">
-                      @rt04.id
+                      @RW10.id
                     </span>
                   </div>
                   <p className="text-[11px] font-medium text-muted-foreground">Panitia kelak cukup melogin dengan mengetik ID di depan ini saja tanpa butuh email.</p>
@@ -257,7 +257,7 @@ export function UserManagementClient({
         <CardHeader className="flex flex-col justify-between gap-4 border-b border-border/60 pb-6 sm:flex-row sm:items-center">
           <div>
             <CardTitle className="text-xl font-bold">Daftar Akun Terdaftar ({users.length})</CardTitle>
-            <CardDescription>Semua staf pengelola pendaftaran lomba 17 Agustus RT 04 di Supabase</CardDescription>
+            <CardDescription>Semua staf pengelola pendaftaran lomba 17 Agustus RW 10 di Supabase</CardDescription>
           </div>
           <div className="relative w-full sm:w-80">
             <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -291,8 +291,8 @@ export function UserManagementClient({
                 ) : (
                   filteredUsers.map((u) => {
                     const isSelf = u.id === currentUserId;
-                    const isCustomDomain = u.email.endsWith("@rt04.id");
-                    const shortUsername = u.email.replace("@rt04.id", "");
+                    const isCustomDomain = u.email.endsWith("@RW10.id");
+                    const shortUsername = u.email.replace("@RW10.id", "");
                     const isBusy = activeActionId === u.id;
 
                     return (

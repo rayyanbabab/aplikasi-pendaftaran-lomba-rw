@@ -169,7 +169,7 @@ export function AdminShell({
                       Semarak 17-an <Flame className="h-4 w-4 text-orange-500 fill-orange-500 animate-pulse shrink-0" />
                     </span>
                     <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">
-                      RT 04
+                      RW 10
                     </span>
                   </div>
                 </Link>
@@ -272,7 +272,7 @@ export function AdminShell({
                 <div className="flex flex-1 flex-col truncate pr-1">
                   <div className="flex items-center gap-1.5 truncate">
                     <span className="truncate text-sm font-black text-foreground">
-                      {session.user.name ?? session.user.email?.replace("@rt04.id", "")}
+                      {session.user.name ?? session.user.email?.replace("@RW10.id", "")}
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5 pt-0.5">
@@ -356,7 +356,7 @@ export function AdminShell({
                 Semarak 17-an <Flame className="h-4 w-4 text-orange-500 fill-orange-500 animate-pulse shrink-0" />
               </span>
               <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">
-                RT 04
+                RW 10
               </span>
             </div>
           </Link>
