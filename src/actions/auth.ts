@@ -105,10 +105,11 @@ export async function adminSignIn(input: unknown) {
         email,
         password: parsed.data.password,
       },
+      headers: await headers(),
     });
     return { ok: true };
   } catch (error) {
-    console.error(error);
+    console.error("adminSignIn error:", error);
     return { ok: false, error: "Email atau password salah." };
   }
 }
