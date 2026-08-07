@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, Flag } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 import { Logo81 } from "@/components/site/logo-81";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,88 @@ const navLinks = [
   { label: "FAQ", href: "/#faq" },
   { label: "Galeri", href: "/galeri" },
 ];
+
+/** Pill toggle: Sun (Terang) / Moon (Gelap) */
+function ThemePill() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    // Placeholder agar tidak ada layout shift
+    return (
+      <div className="flex h-8 w-[70px] items-center rounded-full border border-border/60 bg-muted p-0.5" />
+    );
+  }
+
+  const isDark = resolvedTheme === "dark";
+
+  return (
+    <button
+      type="button"
+      aria-label="Toggle tema gelap/terang"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      title={isDark ? "Beralih ke mode terang" : "Beralih ke mode gelap"}
+      className={`
+        relative flex h-8 w-[70px] items-center rounded-full border p-0.5
+        transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50
+        ${isDark
+          ? "border-slate-600/60 bg-slate-800"
+          : "border-amber-200/70 bg-amber-50"
+        }
+      `}
+    >
+      {/* Sliding thumb */}
+      <span
+        className={`
+          absolute flex h-6 w-6 items-center justify-center rounded-full shadow-sm
+          transition-all duration-300 ease-in-out
+          ${isDark
+            ? "translate-x-[38px] bg-slate-700 text-slate-200"
+            : "translate-x-0 bg-white text-amber-500 shadow-amber-200/40"
+          }
+        `}
+      >
+        {isDark
+          ? <Moon className="h-3.5 w-3.5" />
+          : <Sun className="h-3.5 w-3.5" />
+        }
+      </span>
+
+      {/* Label kiri (Sun) */}
+      <span className={`pl-1.5 text-[10px] font-bold transition-opacity duration-200 ${isDark ? "opacity-50" : "opacity-0"}`}>
+        <Sun className="h-3 w-3 text-amber-400" />
+      </span>
+      {/* Label kanan (Moon) */}
+      <span className={`ml-auto pr-1.5 text-[10px] font-bold transition-opacity duration-200 ${isDark ? "opacity-0" : "opacity-50"}`}>
+        <Moon className="h-3 w-3 text-slate-500" />
+      </span>
+    </button>
+  );
+}
+
+/** Simple icon-only toggle untuk mobile menu */
+function ThemeIconToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
+  const isDark = resolvedTheme === "dark";
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground w-full"
+    >
+      {isDark
+        ? <><Sun className="h-4 w-4 text-amber-400" /><span>Mode Terang</span></>
+        : <><Moon className="h-4 w-4 text-slate-500" /><span>Mode Gelap</span></>
+      }
+    </button>
+  );
+}
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,7 +111,6 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
@@ -43,6 +125,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-3.5">
+
           {/* ── Logo ── */}
           <Link href="/" className="group flex items-center gap-2.5 shrink-0 min-w-0">
             <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-[#ee2b2b] text-white shadow-md shadow-red-500/30 ring-1 ring-white/20 p-1 overflow-hidden transition-transform duration-200 group-hover:scale-105">
@@ -72,8 +155,9 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* ── CTA Buttons ── */}
-          <div className="hidden md:flex items-center gap-2 shrink-0">
+          {/* ── Desktop: Theme toggle + CTA ── */}
+          <div className="hidden md:flex items-center gap-2.5 shrink-0">
+            <ThemePill />
             <Button
               asChild
               variant="ghost"
@@ -111,7 +195,7 @@ export function SiteHeader() {
         {/* ── Mobile Dropdown Menu ── */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            mobileOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <div className="border-t border-border/50 bg-background/95 backdrop-blur-xl px-4 py-4 space-y-1">
@@ -126,7 +210,9 @@ export function SiteHeader() {
                 {link.label}
               </Link>
             ))}
-            <div className="pt-2 border-t border-border/40 mt-2">
+
+            {/* Divider + secondary actions */}
+            <div className="pt-2 border-t border-border/40 mt-2 space-y-0.5">
               <Link
                 href="/login"
                 onClick={() => setMobileOpen(false)}
@@ -134,6 +220,8 @@ export function SiteHeader() {
               >
                 Masuk ke Akun
               </Link>
+              {/* Theme toggle in mobile menu */}
+              <ThemeIconToggle />
             </div>
           </div>
         </div>
