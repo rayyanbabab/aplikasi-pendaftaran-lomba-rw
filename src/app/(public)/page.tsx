@@ -11,6 +11,9 @@ import {
   Trophy,
   UserCheck,
   Users,
+  Flame,
+  Star,
+  MapPin,
 } from "lucide-react";
 
 import { Countdown } from "@/components/site/countdown";
@@ -115,6 +118,13 @@ const faqs = [
   },
 ];
 
+const statsItems = [
+  { icon: Flame, value: "6+", label: "Jenis Lomba" },
+  { icon: Users, value: "200+", label: "Warga Peserta" },
+  { icon: Trophy, value: "3 Hari", label: "Rangkaian Acara" },
+  { icon: Star, value: "Gratis", label: "Tanpa Biaya" },
+];
+
 // Target: 17 Agustus 2026, 07:00 WIB (UTC+7)
 const COUNTDOWN_TARGET = "2026-08-17T00:00:00.000Z";
 
@@ -209,96 +219,141 @@ export default async function LandingPage() {
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
-      {/* ============ HERO ============ */}
-      <section className="py-6 sm:py-10">
+
+      {/* ══════════════════════ HERO ══════════════════════ */}
+      <section className="pt-5 pb-4 sm:pt-8 sm:pb-6">
         <div
-          className="relative min-h-[480px] sm:min-h-[580px] rounded-2xl sm:rounded-3xl bg-[#0a0a0a] shadow-xl"
-          style={{ clipPath: "inset(0 0 0 0 round 24px)" }}
+          className="relative min-h-[500px] sm:min-h-[600px] rounded-2xl sm:rounded-3xl bg-[#0a0a0a] shadow-2xl overflow-hidden"
         >
           <HeroVideoBackground />
-          <div className="relative z-30 flex min-h-[480px] sm:min-h-[580px] flex-col items-center justify-center p-5 sm:p-8 md:p-12 text-center">
-            <div className="relative max-w-3xl space-y-5 sm:space-y-7">
-                <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 sm:px-5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-[0.15em] text-white backdrop-blur-md">
-                  <Flag className="h-3.5 w-3.5 text-[#ee2b2b] sm:h-4 sm:w-4" />
-                  HUT RI KE-81 &bull; TAHUN 2026
-                </div>
-                <h1 className="animate-fade-in text-3xl sm:text-5xl font-black leading-[1.15] sm:leading-[1.1] tracking-tight text-white md:text-6xl lg:text-7xl">
-                  Pesta Rakyat <span className="text-[#ff4242]">17 Agustus</span> RW 10
-                </h1>
-                <p className="animate-fade-in delay-100 mx-auto max-w-2xl text-base font-normal leading-relaxed text-neutral-300 sm:text-lg md:text-xl">
-                  Sambut hari kemerdekaan Indonesia bersama seluruh warga RW 10.
-                  Daftarkan diri atau timmu untuk mengikuti rangkaian kegiatan dan
-                  perlombaan tahunan ini.
-                </p>
-                <div className="animate-fade-in delay-200 flex flex-col items-center justify-center gap-3 pt-3 sm:flex-row sm:gap-4 sm:pt-2 w-full sm:w-auto">
-                  <Button
-                    asChild
-                    className="h-auto w-full sm:w-auto rounded-full bg-[#ee2b2b] px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#d42222] active:scale-[0.99]"
-                  >
-                    <Link href="/#lomba">
-                      Pilih Lomba
-                      <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    className="h-auto w-full sm:w-auto rounded-full border border-white/30 bg-white/10 px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-200 hover:bg-white/20 active:scale-[0.99]"
-                  >
-                    <Link href="/#jadwal">Jadwal Kegiatan</Link>
-                  </Button>
-                </div>
+
+          {/* Content */}
+          <div className="relative z-30 flex min-h-[500px] sm:min-h-[600px] flex-col items-center justify-center p-6 sm:p-10 md:p-14 text-center">
+            <div className="max-w-3xl space-y-5 sm:space-y-6">
+
+              {/* Badge */}
+              <div className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-4 py-1.5 text-[11px] sm:text-xs font-bold tracking-[0.18em] uppercase text-white/90 backdrop-blur-md">
+                <Flag className="h-3.5 w-3.5 text-[#ee2b2b]" />
+                HUT RI KE-81 &bull; TAHUN 2026
               </div>
+
+              {/* Headline */}
+              <h1 className="animate-fade-in text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-white drop-shadow-lg">
+                Pesta Rakyat{" "}
+                <span className="text-[#ff4040]">17 Agustus</span>
+                <br className="hidden sm:block" />
+                <span className="text-white"> RW 10</span>
+              </h1>
+
+              {/* Sub */}
+              <p className="animate-fade-in delay-100 mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-neutral-300/90">
+                Sambut hari kemerdekaan Indonesia bersama seluruh warga RW 10.
+                Daftarkan diri atau timmu untuk mengikuti rangkaian kegiatan dan
+                perlombaan tahunan ini.
+              </p>
+
+              {/* Buttons */}
+              <div className="animate-fade-in delay-200 flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                <Button
+                  asChild
+                  className="h-auto w-full sm:w-auto rounded-full bg-[#ee2b2b] px-8 py-3.5 text-sm sm:text-base font-bold text-white shadow-lg shadow-red-600/30 transition-all duration-200 hover:bg-[#d42222] hover:scale-105 active:scale-[0.98]"
+                >
+                  <Link href="/#lomba">
+                    Pilih Lomba
+                    <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  className="h-auto w-full sm:w-auto rounded-full border border-white/30 bg-white/10 px-8 py-3.5 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-200 hover:bg-white/20 active:scale-[0.98]"
+                >
+                  <Link href="/#jadwal">Jadwal Kegiatan</Link>
+                </Button>
+              </div>
+
+              {/* Location badge */}
+              <div className="animate-fade-in delay-300 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-neutral-400">
+                <MapPin className="h-3.5 w-3.5 text-[#ee2b2b]" />
+                Jl. Pengasinan Tengah, Depan Masjid Nurul Huda, RW 10
+              </div>
+
             </div>
           </div>
-      </section>
-
-      {/* ============ COUNTDOWN ============ */}
-      <section className="mb-10 sm:mb-12 rounded-2xl sm:rounded-3xl border border-border/60 bg-card p-6 sm:py-12 shadow-sm">
-        <div className="mb-6 sm:mb-8 space-y-2 text-center">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-            Agenda Peringatan
-          </p>
-          <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight md:text-3xl">
-            17 Agustus 2026
-          </h3>
-          <div className="mx-auto h-1 w-12 sm:w-16 rounded-full bg-[#ee2b2b]" />
         </div>
-        <Countdown targetDate={COUNTDOWN_TARGET} />
       </section>
 
-      {/* ============ COMPETITIONS (1 Baris di Desktop & Max 4 + CTA di HP) ============ */}
+      {/* ══════════════════════ STATS BAR ══════════════════════ */}
+      <section className="mb-6 sm:mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          {statsItems.map(({ icon: Icon, value, label }) => (
+            <div
+              key={label}
+              className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-border/60 bg-card px-4 py-5 sm:py-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <Icon className="h-5 w-5" />
+              </div>
+              <p className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">{value}</p>
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-muted-foreground">{label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════ COUNTDOWN ══════════════════════ */}
+      <section className="mb-10 sm:mb-14 rounded-2xl sm:rounded-3xl border border-border/60 bg-card overflow-hidden shadow-sm">
+        {/* Top accent bar */}
+        <div className="h-1 w-full bg-gradient-to-r from-[#ee2b2b] via-[#ff6060] to-[#ee2b2b] animate-gradient-shift" />
+        <div className="px-6 py-8 sm:py-12">
+          <div className="mb-6 sm:mb-8 space-y-2 text-center">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-primary">
+              Hitung Mundur
+            </p>
+            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              17 Agustus 2026
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Bersama kita rayakan semangat kemerdekaan!
+            </p>
+            <div className="mx-auto h-1 w-12 sm:w-16 rounded-full bg-[#ee2b2b]" />
+          </div>
+          <Countdown targetDate={COUNTDOWN_TARGET} />
+        </div>
+      </section>
+
+      {/* ══════════════════════ COMPETITIONS ══════════════════════ */}
       <LandingCompetitions items={mappedCompetitions} />
 
-      {/* ============ SCHEDULE ============ */}
+      {/* ══════════════════════ SCHEDULE ══════════════════════ */}
       <section id="jadwal" className="py-14 sm:py-20">
-        <div className="mb-10 sm:mb-16 space-y-3 sm:space-y-4 text-center">
-          <div className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1 sm:px-5 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-primary">
+        <div className="mb-10 sm:mb-14 space-y-3 text-center">
+          <div className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] text-primary">
             Jadwal Kegiatan
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight md:text-5xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
             Rangkaian Acara 17-an
           </h2>
           <p className="mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground">
             Seluruh kegiatan dipusatkan di lingkungan RW 10. Warga diimbau mencatat waktu pelaksanaan dan hadir sesuai agenda.
           </p>
         </div>
-        {/* Mobile Timeline View (< 768px) */}
-        <div className="space-y-6 md:hidden">
+
+        {/* Mobile Timeline */}
+        <div className="space-y-5 md:hidden">
           {scheduleItems.map((item, index) => {
             const Icon = item.icon;
             const isLast = index === scheduleItems.length - 1;
             return (
               <div key={item.date} className="relative flex gap-4">
-                {/* Vertical connector line */}
                 {!isLast && (
-                  <div className="absolute left-[21px] top-12 -bottom-6 w-0.5 bg-gradient-to-b from-[#ee2b2b]/60 via-[#ee2b2b]/30 to-transparent" />
+                  <div className="absolute left-[21px] top-12 -bottom-5 w-0.5 bg-gradient-to-b from-[#ee2b2b]/70 via-[#ee2b2b]/30 to-transparent" />
                 )}
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-white bg-[#ee2b2b] text-white shadow-md shadow-red-500/20 ring-4 ring-red-500/10 dark:border-background z-10 mt-1">
                   <Icon className="h-5 w-5" />
                 </div>
                 <Card className="flex-1 rounded-2xl border border-border/60 bg-card p-5 shadow-sm min-w-0">
-                  <h4 className="mb-1 text-xs font-bold uppercase tracking-[0.15em] text-primary">{item.date}</h4>
-                  <p className="mb-3 text-base font-extrabold tracking-tight text-foreground">{item.title}</p>
+                  <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.15em] text-primary">{item.date}</p>
+                  <p className="mb-3 text-[15px] font-extrabold tracking-tight text-foreground">{item.title}</p>
                   <ul className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                     {item.details.map((detail) => (
                       <li key={detail} className="flex items-start gap-2">
@@ -313,7 +368,7 @@ export default async function LandingPage() {
           })}
         </div>
 
-        {/* Desktop Timeline View (>= 768px) */}
+        {/* Desktop Timeline */}
         <div className="hidden md:block relative space-y-12 timeline-line">
           {scheduleItems.map((item, index) => {
             const Icon = item.icon;
@@ -321,9 +376,9 @@ export default async function LandingPage() {
             return (
               <div key={item.date} className="relative z-10 flex items-center gap-8 flex-row">
                 {isLeft ? (
-                  <div className="w-1/2 text-right">
-                    <Card className="card-hover inline-block rounded-3xl border border-border/60 p-6 shadow-sm min-w-[320px] text-right">
-                      <h4 className="mb-1 text-xs font-bold uppercase tracking-[0.15em] text-primary">{item.date}</h4>
+                  <div className="w-1/2 flex justify-end">
+                    <Card className="rounded-3xl border border-border/60 p-6 sm:p-8 shadow-sm max-w-sm w-full transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
+                      <p className="mb-1 text-xs font-bold uppercase tracking-[0.15em] text-primary">{item.date}</p>
                       <p className="mb-4 text-lg font-extrabold tracking-tight">{item.title}</p>
                       <ul className="space-y-2.5 text-sm leading-relaxed text-muted-foreground">
                         {item.details.map((detail) => (
@@ -345,8 +400,8 @@ export default async function LandingPage() {
                   <div className="w-1/2" />
                 ) : (
                   <div className="w-1/2">
-                    <Card className="card-hover inline-block rounded-3xl border border-border/60 p-6 shadow-sm min-w-[320px] text-left">
-                      <h4 className="mb-1 text-xs font-bold uppercase tracking-[0.15em] text-primary">{item.date}</h4>
+                    <Card className="rounded-3xl border border-border/60 p-6 sm:p-8 shadow-sm max-w-sm w-full transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
+                      <p className="mb-1 text-xs font-bold uppercase tracking-[0.15em] text-primary">{item.date}</p>
                       <p className="mb-4 text-lg font-extrabold tracking-tight">{item.title}</p>
                       <ul className="space-y-2.5 text-sm leading-relaxed text-muted-foreground">
                         {item.details.map((detail) => (
@@ -365,64 +420,66 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      {/* ============ RULES ============ */}
+      {/* ══════════════════════ RULES ══════════════════════ */}
       <section id="syarat" className="py-14 sm:py-20">
-        <div className="mb-10 sm:mb-16 space-y-3 sm:space-y-4 text-center">
-          <div className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1 sm:px-5 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-primary">
+        <div className="mb-10 sm:mb-14 space-y-3 text-center">
+          <div className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] text-primary">
             Ketentuan Peserta
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight md:text-5xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
             Persyaratan Lomba
           </h2>
           <p className="mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground">
             Panduan umum bagi seluruh warga RW 10 yang berpartisipasi dalam perayaan peringatan kemerdekaan.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-3">
           {rules.map((rule, index) => {
             const Icon = rule.icon;
             return (
               <div
                 key={rule.title}
-                className="group rounded-2xl sm:rounded-3xl border border-border/60 bg-card p-6 sm:p-8 text-center shadow-sm transition-all duration-200 hover:border-primary/40 hover:-translate-y-1"
+                className="group relative rounded-2xl sm:rounded-3xl border border-border/60 bg-card p-7 sm:p-8 text-center shadow-sm transition-all duration-200 hover:border-primary/40 hover:-translate-y-1 hover:shadow-lg overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="mx-auto mb-5 sm:mb-6 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-white">
-                  <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
+                {/* Subtle bg glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-transparent transition-all duration-300 pointer-events-none rounded-2xl sm:rounded-3xl" />
+                <div className="relative z-10">
+                  <div className="mx-auto mb-5 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-200 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+                    <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
+                  </div>
+                  <h5 className="mb-3 text-lg sm:text-xl font-bold tracking-tight text-foreground">{rule.title}</h5>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{rule.description}</p>
                 </div>
-                <h5 className="mb-2.5 text-lg sm:text-xl font-bold tracking-tight text-foreground">{rule.title}</h5>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {rule.description}
-                </p>
               </div>
             );
           })}
         </div>
       </section>
 
-      {/* ============ FAQ ============ */}
+      {/* ══════════════════════ FAQ ══════════════════════ */}
       <section id="faq" className="py-14 sm:py-20">
-        <div className="mb-10 sm:mb-16 space-y-3 sm:space-y-4 text-center">
-          <div className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1 sm:px-5 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-primary">
+        <div className="mb-10 sm:mb-14 space-y-3 text-center">
+          <div className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] text-primary">
             Informasi Umum
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight md:text-5xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
             Pertanyaan Sering Diajukan
           </h2>
           <p className="mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground">
             Ringkasan informasi penting mengenai teknis pendaftaran, aturan main, dan pelaksanaan perlombaan.
           </p>
         </div>
-        <div className="mx-auto max-w-3xl space-y-3.5 sm:space-y-4">
+        <div className="mx-auto max-w-3xl space-y-3">
           {faqs.map((faq) => (
             <details
               key={faq.question}
-              className="group overflow-hidden rounded-2xl border border-border/60 bg-card transition-colors duration-200 hover:border-primary/30 shadow-sm"
+              className="group overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-200 hover:border-primary/30 shadow-sm open:shadow-md open:border-primary/20"
               open={faq.open}
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 sm:p-6 text-left font-semibold text-foreground select-none">
-                <span className="text-base tracking-tight">{faq.question}</span>
-                <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180" />
+                <span className="text-sm sm:text-base tracking-tight">{faq.question}</span>
+                <ChevronDown className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 group-open:rotate-180 group-open:text-primary" />
               </summary>
               <div className="border-t border-border/40 px-5 sm:px-6 pb-5 sm:pb-6 pt-4 text-sm leading-relaxed text-muted-foreground">
                 {faq.answer}
@@ -432,43 +489,40 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      {/* ============ CTA ============ */}
-      <section className="py-14 sm:py-20">
+      {/* ══════════════════════ CTA ══════════════════════ */}
+      <section className="pb-16 sm:pb-20">
         <div
           className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-[#0a0a0a] p-8 sm:p-12 md:p-20 text-center text-white shadow-2xl"
-          style={{ clipPath: "inset(0 0 0 0 round 24px)" }}
         >
-          {/* Official government commemorative background banner */}
+          {/* Banner bg */}
           <Image
             src="/banner-hutri-81.png"
             alt="Banner HUT RI Ke-81 Resmi"
             fill
             className="object-cover object-center pointer-events-none opacity-90"
           />
-
-          {/* Lighter crimson & theatrical dark shading canopy to show off official banner graphics */}
-          <div className="absolute inset-0 z-10 bg-gradient-to-r from-red-950/65 via-[#880d0d]/40 to-red-950/65 pointer-events-none" />
-          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-transparent to-black/40 pointer-events-none" />
-
-          {/* Subtle lighting accents */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-red-950/70 via-[#880d0d]/45 to-red-950/70 pointer-events-none" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/75 via-transparent to-black/45 pointer-events-none" />
           <div className="absolute -left-20 -top-20 z-10 h-72 w-72 rounded-full bg-red-500/10 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -right-16 z-10 h-96 w-96 rounded-full bg-black/30 blur-3xl pointer-events-none" />
 
           <div className="relative z-20 mx-auto max-w-2xl space-y-5 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 sm:px-5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-[0.15em] text-white backdrop-blur-md">
-              <Flag className="h-3.5 w-3.5 text-[#ee2b2b] sm:h-4 sm:w-4" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 text-[11px] sm:text-xs font-bold tracking-[0.18em] uppercase text-white backdrop-blur-md">
+              <Flag className="h-3.5 w-3.5 text-[#ee2b2b]" />
               GUYUB RUKUN &bull; RW 10
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black leading-[1.15] sm:leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl">
-              Mari Ramaikan &amp; Bersatu<br className="hidden sm:block" /> Dalam Peringatan HUT RI
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-[1.1] tracking-tight text-white">
+              Mari Ramaikan &amp; Bersatu
+              <br className="hidden sm:block" />
+              Dalam Peringatan HUT RI
             </h2>
-            <p className="text-base sm:text-lg leading-relaxed text-neutral-200">
+            <p className="text-sm sm:text-base leading-relaxed text-neutral-200/90">
               Pendaftaran terbuka bagi seluruh keluarga besar RW 10. Pilihlah kategori perlombaan kegemaran Anda dan daftarkan nama sekarang juga.
             </p>
-            <div className="flex flex-col items-center justify-center gap-3.5 sm:gap-4 pt-4 sm:flex-row">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
               <Button
                 asChild
-                className="h-auto w-full rounded-full bg-white px-8 py-3.5 sm:px-10 sm:py-4 text-base sm:text-lg font-bold text-[#dc2626] shadow-lg transition-colors duration-200 hover:bg-neutral-100 active:scale-[0.99] sm:w-auto"
+                className="h-auto w-full sm:w-auto rounded-full bg-white px-8 py-3.5 sm:px-10 sm:py-4 text-base font-bold text-[#dc2626] shadow-lg transition-all duration-200 hover:bg-neutral-100 hover:scale-105 active:scale-[0.98]"
               >
                 <Link href="/#lomba">
                   Daftar Lomba
@@ -477,7 +531,7 @@ export default async function LandingPage() {
               </Button>
               <Button
                 asChild
-                className="h-auto w-full rounded-full border border-white/30 bg-black/40 px-8 py-3.5 sm:px-10 sm:py-4 text-base sm:text-lg font-semibold text-white backdrop-blur-md transition-colors duration-200 hover:bg-black/60 active:scale-[0.99] sm:w-auto"
+                className="h-auto w-full sm:w-auto rounded-full border border-white/30 bg-black/40 px-8 py-3.5 sm:px-10 sm:py-4 text-base font-semibold text-white backdrop-blur-md transition-all duration-200 hover:bg-black/60 active:scale-[0.98]"
               >
                 <Link href="/#jadwal">Lihat Jadwal</Link>
               </Button>
