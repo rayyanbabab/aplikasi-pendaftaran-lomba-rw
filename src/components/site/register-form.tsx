@@ -102,6 +102,13 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
     );
   }, [birthDate, categories, eventDateValue]);
 
+  // Auto-pilih kategori umur saat tanggal lahir berubah
+  React.useEffect(() => {
+    if (suggestedCategory) {
+      form.setValue("ageCategoryId", String(suggestedCategory.id));
+    }
+  }, [suggestedCategory, form]);
+
   const onSubmit = (values: RegistrationInput) => {
     startTransition(async () => {
       const result = await submitRegistration(values);
@@ -185,12 +192,12 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
                   </SelectContent>
                 </Select>
                 {suggestedCategory ? (
-                  <p className="animate-fade-in inline-flex items-center gap-1 text-[11px] font-bold text-primary">
+                  <p className="animate-fade-in inline-flex items-center gap-1 text-[11px] font-bold text-green-600 dark:text-green-400">
                     <Sparkles className="h-3.5 w-3.5 text-amber-500" />
-                    Saran otomatis: <span className="underline decoration-primary/50">{suggestedCategory.name}</span>
+                    Dipilih otomatis: <span className="underline">{suggestedCategory.name}</span>
                   </p>
                 ) : (
-                  <p className="text-[11px] text-foreground/75">Pilih rentang usia yang sesuai dengan umur ketua tim atau peserta utama.</p>
+                  <p className="text-[11px] text-foreground/75">Isi tanggal lahir peserta agar kategori usia terisi otomatis.</p>
                 )}
               </div>
             </div>
