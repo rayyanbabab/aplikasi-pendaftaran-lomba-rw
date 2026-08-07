@@ -17,8 +17,9 @@ export async function signUpUser(input: unknown) {
     return { ok: false, error: parsed.error.issues[0]?.message || "Data pendaftaran tidak valid." };
   }
 
+  // Lowercase seluruhnya agar konsisten dengan better-auth
   const cleanUsername = parsed.data.username.toLowerCase().trim().replace(/@.*$/, "");
-  const email = `${cleanUsername}@RW10.id`;
+  const email = `${cleanUsername}@rw10.id`;
 
   // Cek apakah username/email sudah terdaftar
   const existing = await db
@@ -56,13 +57,18 @@ export async function signUpUser(input: unknown) {
       updatedAt: new Date(),
     });
 
-    // Otomatis login pengguna setelah berhasil mendaftar
-    await auth.api.signInEmail({
-      body: {
-        email,
-        password: parsed.data.password,
-      },
-    });
+    // Otomatis login setelah berhasil mendaftar
+    // Kirim headers agar better-auth bisa set session cookie
+    try {
+      await auth.api.signInEmail({
+        body: { email, password: parsed.data.password },
+        headers: await headers(),
+      });
+    } catch (loginErr) {
+      // Akun sudah berhasil dibuat meski auto-login gagal
+      // User tetap bisa login manual di /login
+      console.warn("Auto-login after register failed (non-fatal):", loginErr);
+    }
 
     return { ok: true };
   } catch (error: any) {
@@ -70,6 +76,7 @@ export async function signUpUser(input: unknown) {
     return { ok: false, error: error.message || "Gagal membuat akun." };
   }
 }
+
 
 export async function adminSignIn(input: unknown) {
   const parsed = adminSignInSchema.safeParse(input);
@@ -79,7 +86,7 @@ export async function adminSignIn(input: unknown) {
 
   let email = parsed.data.email.toLowerCase().trim();
   if (!email.includes("@")) {
-    email = `${email}@RW10.id`;
+    email = `${email}@rw10.id`;
   }
 
   const existing = await db
