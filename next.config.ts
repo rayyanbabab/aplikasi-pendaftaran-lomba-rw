@@ -19,9 +19,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  outputFileTracingRoot: path.join(__dirname),
   // Optimasi lanjutan pemangkasan modul (Tree-Shaking) pada perpustakaan besar
   experimental: {
-    outputFileTracingRoot: path.join(__dirname),
     optimizePackageImports: [
       "lucide-react",
       "date-fns",
