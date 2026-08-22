@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   // Aktifkan kompresi Gzip & Brotli otomatis untuk memperkecil transfer data
@@ -20,6 +21,7 @@ const nextConfig: NextConfig = {
   },
   // Optimasi lanjutan pemangkasan modul (Tree-Shaking) pada perpustakaan besar
   experimental: {
+    outputFileTracingRoot: path.join(__dirname),
     optimizePackageImports: [
       "lucide-react",
       "date-fns",
