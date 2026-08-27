@@ -10,10 +10,10 @@ export const metadata = {
 };
 
 const fallbackImages = [
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDcfd6JiPtQHeEZHltfvG2QCB4iWX4m6ZwiEvqKnEOnQDPAeLwEjYxCZgCGZHHBq5VhcfLXxZ-D0LRLPr9AuwDlthunY8Yi3xHFGvO9f8mXvP6dZRbNQnOHgLMRNryVwzb0uu_8ph9fRJCD-4_dVuNVPUJgItaUmE9Jrtpf3XyIv_Yp-Hnow6bs1ZuOW5wBd-cTdsLLAn1Ql7bKbN3LJFh-xpTOmdlx2WHq09O_ZlwVSz1fQ7KYkpKFIQRokUEJis597m0a8FkgyvKh",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAiEUKvoyDVXKsHmojo80XyePm4vJywQayV62FX7kifKOI8AN_aQPoRZO9IT-Lbj4TZ81UNIn1TcPgu0_Mlux2Jhzx8EPOY5W_cUf8i__LFN-sSpcndZp1dIuWATYej0BdR2Q0H4-a6bDo9jF0LM2iEN1OF6SG3BhFGungEyHgTbJ-RnA75lIDwfn-DjLKVlrdACcWSTzT61aiMI_L55LCmu-03DJQg0Pk9zA1xP9FcQt7OvUJxG6BqrQkKlyXel3z1TXISrQi5_YRz",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDTILYtvkKR8JcIZjB9d8m0VJdS2OPIlKChClCBz_lVLwdDKFxQRltT4UNJebo4azy_hLghMML_0wMbIOpXdKA4mHp0LFqUwKiwD7XaTH7Uj2xnbJULPwhPxn0c0lBKpJd9GfIHqSvWTw0hIN8Ld2l40xBJpN7eI8wOi1P4AqRhRaTQcy59PibRldWYW5rMJWXpT-lmqYpt-v-h07SNVF3OFlFJyb99Rk_30L7UI_JBmy5mLkO1eqpEjIdjrWuJFNL84wqYf1-RdZG0",
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuCeaNMW_Obj14rr4oN1-SpJuk0hQR6tsuQROZNt2IQCwT5YK_VE3xICn2D9gqtpO6rZqDfTqT4SVH1dV_Ua46kO-sH4jeEUK9N7WZDNb883yDVsqFceRYgY5x2XBU6lnhc3IIoO-SoY4i9QWUCGbG1buPWIIrAQO8-s8rcOli0tczH4RnWArbl6-k996BCCXlwmgwd9iDKttxWTV39GxWIgT0ql8HWnIwrF3UQmmZNkbxhF48TYOdG5cI7stsqBRAzq3AVNgswL3GDu",
+  "https://images.unsplash.com/photo-1530549387789-4c1017266635?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=800&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=800&auto=format&fit=crop",
 ];
 
 const fallbackCategoryLabels = [

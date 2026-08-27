@@ -74,7 +74,7 @@ export function RegisterAccountForm() {
           )}
           style={{
             backgroundImage:
-              "url('https://lh3.googleusercontent.com/aida-public/AB6AXuB-eqURzXMCDofVV5BRZHSaVNULfF65g_dmipjoaWf_IsZF_sMvt6kOzstDsJBqXWnxDEiN5105G5acKfOs4RtuKKGqIjK2gslHUHISRa4bq99x_WkeQQFe-Chseb_BbyC6hx_C7b6twPIs5ZDJmNB_9Ivu2VSA_ps39ybiwiIWnzq0Nz1zs_Z95eQUS4htf2TrXk0FQxaEoKwSxdZxdJ1V3nlTaUDIAOIj4Q4dg7stLc6XIL0Ko0nhYPhartaiuX5nNNTTuyYwRW70')",
+              "url('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop')",
           }}
         />
         <div
