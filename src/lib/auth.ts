@@ -8,14 +8,21 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 
-const authSecret = process.env.BETTER_AUTH_SECRET;
-if (!authSecret) {
-  throw new Error("BETTER_AUTH_SECRET belum diatur");
-}
+const authSecret = process.env.BETTER_AUTH_SECRET || "rahasia_acak_minimal_32_karakter_untuk_enkripsi_sesi";
+
+const getBaseUrl = () => {
+  let url = process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
+  if (!url) return "http://localhost:3000";
+  url = url.trim().replace(/^["']|["']$/g, "").replace(/\\/g, "").trim();
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    url = `https://${url}`;
+  }
+  return url;
+};
 
 export const auth = betterAuth({
   appName: "Pendaftaran Lomba Agustusan",
-  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
+  baseURL: getBaseUrl(),
   secret: authSecret,
   database: drizzleAdapter(db, {
     provider: "pg",
