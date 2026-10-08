@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Calendar, BellRing, Share2, Check } from "lucide-react";
 
 const pad = (value: number) => String(value).padStart(2, "0");
 
@@ -16,6 +17,7 @@ function getRemaining(targetDate: Date) {
 }
 
 export function Countdown({ targetDate }: { targetDate?: string | null }) {
+  const [copied, setCopied] = React.useState(false);
   const [remaining, setRemaining] = React.useState(() => {
     if (!targetDate) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     const parsed = new Date(targetDate);
@@ -25,24 +27,13 @@ export function Countdown({ targetDate }: { targetDate?: string | null }) {
     return getRemaining(parsed);
   });
 
-  const [prevSeconds, setPrevSeconds] = React.useState(remaining.seconds);
-  const [isTicking, setIsTicking] = React.useState(false);
-
   React.useEffect(() => {
     if (!targetDate) return undefined;
     const parsed = new Date(targetDate);
     if (Number.isNaN(parsed.getTime())) return undefined;
 
     const interval = setInterval(() => {
-      const newRemaining = getRemaining(parsed);
-      setRemaining((prev) => {
-        if (prev.seconds !== newRemaining.seconds) {
-          setPrevSeconds(prev.seconds);
-          setIsTicking(true);
-          setTimeout(() => setIsTicking(false), 300);
-        }
-        return newRemaining;
-      });
+      setRemaining(getRemaining(parsed));
     }, 1000);
 
     return () => clearInterval(interval);
@@ -52,62 +43,109 @@ export function Countdown({ targetDate }: { targetDate?: string | null }) {
     { label: "Hari", value: remaining.days },
     { label: "Jam", value: remaining.hours },
     { label: "Menit", value: remaining.minutes },
-    { label: "Detik", value: remaining.seconds },
+    { label: "Detik", value: remaining.seconds, isSeconds: true },
   ];
 
-  const isFinished = remaining.days === 0 && remaining.hours === 0 && remaining.minutes === 0 && remaining.seconds === 0;
+  const isFinished =
+    remaining.days === 0 &&
+    remaining.hours === 0 &&
+    remaining.minutes === 0 &&
+    remaining.seconds === 0;
+
+  const handleShareWa = () => {
+    const text = encodeURIComponent(
+      `Halo Bapak/Ibu dan Pemuda RW 10! Ayo ramaikan Peringatan HUT RI ke-81 RW 10 Pengasinan. Rangkaian lomba dimulai 16-18 Agustus 2026. Pendaftaran gratis 100%! Cek cabang lomba dan jadwal lengkap di: ${typeof window !== "undefined" ? window.location.origin : ""}`,
+    );
+    window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
+  };
+
+  const handleDownloadCalendar = () => {
+    // Generate .ics calendar file for 17 Agustus 2026
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Semarak 17-an RW 10//ID
+BEGIN:VEVENT
+UID:hutri81-rw10-20260817@pengasinan
+DTSTAMP:20260801T000000Z
+DTSTART:20260817T000000Z
+DTEND:20260817T150000Z
+SUMMARY:Peringatan HUT ke-81 Kemerdekaan RI RW 10
+DESCRIPTION:Pesta Rakyat dan Perlombaan Warga HUT RI ke-81 RW 10 Kelurahan Pengasinan. Lapangan Utama RW 10.
+LOCATION:Lapangan Utama RW 10, Jl. Pengasinan Tengah
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "agenda-17an-rw10.ics");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   if (isFinished) {
     return (
-      <div className="mx-auto max-w-2xl px-4 text-center">
-        <div className="animate-scale-in rounded-3xl border border-primary/20 bg-primary/5 p-8">
-          <p className="text-3xl font-black text-primary md:text-4xl">🎉 Acara Telah Dimulai!</p>
-          <p className="mt-3 text-base text-muted-foreground">Selamat merayakan kemerdekaan Indonesia!</p>
-        </div>
+      <div className="mx-auto max-w-xl rounded-2xl border border-primary/30 bg-primary/10 p-6 text-center shadow-xs">
+        <p className="text-xl font-black text-primary sm:text-2xl">
+          Rangkaian Acara HUT RI ke-81 Sedang Berlangsung!
+        </p>
+        <p className="mt-1.5 text-xs text-muted-foreground">
+          Mari ramaikan Lapangan RW 10 bersama seluruh keluarga dan tetangga tercinta.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto grid max-w-2xl grid-cols-4 gap-2 px-1 sm:gap-4 sm:px-4 md:gap-6">
-      {items.map((item, index) => {
-        const isSecond = item.label === "Detik";
-        return (
+    <div className="space-y-4">
+      {/* Digits Grid */}
+      <div className="grid grid-cols-4 gap-2 sm:gap-3 max-w-md mx-auto">
+        {items.map((item) => (
           <div
             key={item.label}
-            className="animate-fade-in-up flex flex-col items-center gap-1.5 sm:gap-3"
-            style={{ animationDelay: `${index * 100}ms` }}
+            className={`flex flex-col items-center justify-center rounded-2xl border border-border/80 bg-background/80 px-2 py-3 sm:py-3.5 shadow-2xs backdrop-blur-xs transition-colors ${
+              item.isSeconds ? "border-primary/40" : ""
+            }`}
           >
-            <div
-              className={`relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl border bg-gradient-to-b from-primary/5 to-primary/10 dark:from-primary/15 dark:to-primary/25 ${
-                isSecond && isTicking
-                  ? "border-primary/40 shadow-md sm:shadow-lg shadow-primary/10"
-                  : "border-primary/10"
+            <span
+              suppressHydrationWarning
+              className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight tabular-nums ${
+                item.isSeconds ? "text-primary animate-pulse" : "text-foreground"
               }`}
-              style={{ transition: "border-color 0.3s ease, box-shadow 0.3s ease" }}
             >
-              {/* Decorative corner accent */}
-              <div className="absolute -right-3 -top-3 h-10 w-10 rounded-full bg-primary/10 blur-xl" />
-              <p
-                suppressHydrationWarning
-                className={`relative z-10 font-black tabular-nums text-primary ${
-                  isSecond && isTicking ? "scale-110" : "scale-100"
-                }`}
-                style={{
-                  fontSize: "clamp(1.25rem, 4.5vw, 3.2rem)",
-                  transition: "transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                  fontVariantNumeric: "tabular-nums",
-                }}
-              >
-                {pad(item.value)}
-              </p>
-            </div>
-            <p className="text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.2em] text-muted-foreground truncate w-full text-center">
+              {pad(item.value)}
+            </span>
+            <span className="mt-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {item.label}
-            </p>
+            </span>
           </div>
-        );
-      })}
+        ))}
+      </div>
+
+      {/* Interactive Remind & Share Buttons */}
+      <div className="flex items-center justify-center gap-2 pt-1 text-xs">
+        <button
+          type="button"
+          onClick={handleDownloadCalendar}
+          className="inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-card px-3 py-1.5 text-xs font-bold text-foreground hover:border-primary/40 hover:bg-muted/40 transition-all cursor-pointer shadow-2xs"
+        >
+          <Calendar className="h-3.5 w-3.5 text-primary" />
+          <span>Simpan ke Kalender (.ics)</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleShareWa}
+          className="inline-flex items-center gap-1.5 rounded-xl border border-border/80 bg-card px-3 py-1.5 text-xs font-bold text-foreground hover:border-emerald-500/40 hover:bg-emerald-50/20 transition-all cursor-pointer shadow-2xs"
+        >
+          <Share2 className="h-3.5 w-3.5 text-emerald-600" />
+          <span>Bagikan ke WhatsApp</span>
+        </button>
+      </div>
     </div>
   );
 }
