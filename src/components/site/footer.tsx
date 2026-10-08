@@ -38,11 +38,11 @@ const socialLinks = [
 ];
 
 const quickLinks = [
-  { label: "Daftar Lomba", href: "#lomba" },
-  { label: "Jadwal Acara", href: "#jadwal" },
-  { label: "Syarat Peserta", href: "#syarat" },
-  { label: "Galeri Tahun Lalu", href: "/galeri" },
-  { label: "Tanya Jawab (FAQ)", href: "#faq" },
+  { label: "Daftar Lomba", href: "/#lomba" },
+  { label: "Jadwal Acara", href: "/#jadwal" },
+  { label: "Syarat Peserta", href: "/#syarat" },
+  { label: "Galeri Dokumentasi", href: "/galeri" },
+  { label: "Tanya Jawab (FAQ)", href: "/#faq" },
 ];
 
 export function SiteFooter() {
@@ -54,21 +54,21 @@ export function SiteFooter() {
         <div className="grid gap-12 sm:gap-10 md:grid-cols-4 pb-12 border-b border-border/50">
 
           {/* Brand col */}
-          <div className="space-y-6 md:col-span-2">
+          <div className="space-y-4 md:col-span-2">
             <Link href="/" className="group inline-flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#ee2b2b] text-white shadow-lg shadow-red-500/20 p-1.5 overflow-hidden ring-1 ring-white/20 transition-transform duration-200 group-hover:scale-105">
-                <Logo81 className="h-full w-full object-contain" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-2xs p-1.5 overflow-hidden ring-1 ring-black/5 transition-transform duration-200 group-hover:scale-102">
+                <Logo81 className="h-full w-full object-contain brightness-0 invert" />
               </div>
               <div>
-                <p className="text-xl font-black tracking-tight leading-tight">Semarak 17-an</p>
-                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-primary">
-                  RW 10 Community
+                <p className="text-lg font-black tracking-tight leading-tight text-foreground">Semarak 17-an</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                  RW 10 Kelurahan Pengasinan
                 </p>
               </div>
             </Link>
-            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Wadah silaturahmi dan perayaan kemerdekaan bagi seluruh warga RW 10.
-              Mari bersatu, bergembira, dan rayakan semangat Merah Putih bersama.
+            <p className="max-w-sm text-xs leading-relaxed text-muted-foreground">
+              Portal resmi pendaftaran dan informasi perlombaan peringatan HUT Kemerdekaan RI ke-81 di lingkungan RW 10.
+              Merajut kebersamaan, menjaga sportivitas, dan mempererat kerukunan antar-warga.
             </p>
             <div className="flex gap-2.5">
               {socialLinks.map(({ icon, href, label, hoverColor }) => (
