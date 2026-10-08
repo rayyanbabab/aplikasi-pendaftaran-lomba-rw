@@ -1,11 +1,29 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronLeft, ChevronRight, Users } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Users,
+  Search,
+  Info,
+  Medal,
+  ShieldCheck,
+  LayoutGrid,
+  Columns3,
+  Calendar,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { CompetitionVisual } from "@/components/site/competition-visual";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export type LandingCompetitionItem = {
   id: number;
@@ -14,7 +32,8 @@ export type LandingCompetitionItem = {
   countLabel: string;
   countSuffix: string;
   description: string;
-  image: string;
+  image?: string;
+  type?: string;
   isFavorite?: boolean;
   href: string;
 };
@@ -22,7 +41,11 @@ export type LandingCompetitionItem = {
 export function LandingCompetitions({ items }: { items: LandingCompetitionItem[] }) {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = React.useState(false);
-  const [showRightArrow, setShowRightArrow] = React.useState(items.length > 4);
+  const [showRightArrow, setShowRightArrow] = React.useState(items.length > 3);
+  const [activeFilter, setActiveFilter] = React.useState<"ALL" | "SOLO" | "TEAM" | "CHILD">("ALL");
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [viewMode, setViewMode] = React.useState<"carousel" | "grid">("carousel");
+  const [selectedCompetition, setSelectedCompetition] = React.useState<LandingCompetitionItem | null>(null);
 
   const checkScroll = () => {
     const el = scrollContainerRef.current;
@@ -45,223 +68,412 @@ export function LandingCompetitions({ items }: { items: LandingCompetitionItem[]
     };
   }, [items.length]);
 
-  const isSlidingRef = React.useRef(false);
-
   const slide = (direction: "left" | "right") => {
     const el = scrollContainerRef.current;
-    if (!el || isSlidingRef.current) return;
-
-    isSlidingRef.current = true;
-    const startX = el.scrollLeft;
-    // Kalkulasi jarak geser secara presisi sebesar 2 kartu (termasuk gap 24px/1.5rem)
-    const cardWidth = el.firstElementChild
-      ? (el.firstElementChild as HTMLElement).offsetWidth + 24
-      : el.clientWidth * 0.5;
-    const distance = cardWidth * 2; 
-    const targetX = direction === "right" ? startX + distance : startX - distance;
-
-    const startTime = performance.now();
-    const duration = 650; // 650ms untuk durasi luncuran berirama sinematik & empuk
-
-    // Kurva Quintic Ease-Out: awal melampar gesit, akhir melambat super mulus (pillowy decelerated stop)
-    const easeOutQuint = (t: number): number => 1 - Math.pow(1 - t, 5);
-
-    const animateScroll = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeProgress = easeOutQuint(progress);
-
-      el.scrollLeft = startX + (targetX - startX) * easeProgress;
-
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      } else {
-        isSlidingRef.current = false;
-        checkScroll();
-      }
-    };
-
-    requestAnimationFrame(animateScroll);
+    if (!el) return;
+    const scrollAmount = el.clientWidth * 0.75;
+    el.scrollBy({
+      left: direction === "right" ? scrollAmount : -scrollAmount,
+      behavior: "smooth",
+    });
   };
 
-  const mobileItems = items.slice(0, 4);
-  const hasMoreItems = items.length > 4;
+  const filteredItems = React.useMemo(() => {
+    return items.filter((item) => {
+      // Filter by type
+      if (activeFilter === "SOLO") {
+        if (item.type !== "SOLO" && item.type !== "BOTH" && item.type) return false;
+      } else if (activeFilter === "TEAM") {
+        if (item.type !== "TEAM" && item.type !== "BOTH") return false;
+      } else if (activeFilter === "CHILD") {
+        const isChild = item.categoryLabel.toLowerCase().includes("anak");
+        if (!isChild) return false;
+      }
+
+      // Filter by search
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        const matchesName = item.name.toLowerCase().includes(q);
+        const matchesCategory = item.categoryLabel.toLowerCase().includes(q);
+        const matchesDesc = item.description.toLowerCase().includes(q);
+        return matchesName || matchesCategory || matchesDesc;
+      }
+
+      return true;
+    });
+  }, [items, activeFilter, searchQuery]);
 
   return (
-    <section id="lomba" className="py-14 sm:py-20">
-      <div className="mb-10 sm:mb-16 flex flex-col items-center justify-between gap-6 md:flex-row md:items-end">
-        <div className="space-y-3 sm:space-y-4 text-center md:text-left">
-          <div className="inline-block rounded-full border border-primary/20 bg-primary/10 px-4 py-1 sm:px-5 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-primary">
-            Daftar Perlombaan
+    <section id="lomba" className="py-12 sm:py-16">
+      {/* Section Header */}
+      <div className="mb-8 sm:mb-12 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            Cabang Perlombaan Warga
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight md:text-5xl">
-            Lomba Kemerdekaan
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground">
+            Lomba 17-an RW 10
           </h2>
-          <p className="max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground">
-            Beragam lomba untuk anak-anak hingga dewasa. Silakan mendaftar secara mandiri atau perwakilan tim sebelum batas kuota terpenuhi.
+          <p className="max-w-2xl text-xs sm:text-sm text-muted-foreground leading-relaxed">
+            Terbuka untuk warga RT 01 sampai RT 08. Daftarkan diri secara mandiri atau bentuk tim antar-tetangga sebelum kuota terpenuhi.
           </p>
         </div>
 
-        {/* Kontrol Tombol Slide Khusus Mode Desktop jika jumlah lomba > 4 */}
-        <div className="hidden items-center gap-2.5 md:flex">
-          {items.length > 4 && (
-            <>
-              <button
-                type="button"
-                onClick={() => slide("left")}
-                disabled={!showLeftArrow}
-                aria-label="Geser ke Kiri"
-                className={`flex h-12 w-12 items-center justify-center rounded-2xl border border-border/80 bg-card transition-all duration-200 cursor-pointer ${
-                  showLeftArrow
-                    ? "text-foreground shadow-md hover:border-primary/50 hover:bg-primary/5 hover:scale-105 active:scale-95"
-                    : "opacity-35 cursor-not-allowed border-dashed text-muted-foreground"
-                }`}
-              >
-                <ChevronLeft className="h-6 w-6" />
-              </button>
-              <button
-                type="button"
-                onClick={() => slide("right")}
-                disabled={!showRightArrow}
-                aria-label="Geser ke Kanan"
-                className={`flex h-12 w-12 items-center justify-center rounded-2xl border border-border/80 bg-card transition-all duration-200 cursor-pointer ${
-                  showRightArrow
-                    ? "text-foreground shadow-md hover:border-primary/50 hover:bg-primary/5 hover:scale-105 active:scale-95"
-                    : "opacity-35 cursor-not-allowed border-dashed text-muted-foreground"
-                }`}
-              >
-                <ChevronRight className="h-6 w-6" />
-              </button>
-            </>
-          )}
-          <Link
-            href="/daftar"
-            className="ml-2 inline-flex h-12 items-center justify-center gap-2 rounded-2xl border border-border bg-card px-5 text-sm font-bold text-foreground shadow-xs transition-all duration-200 hover:border-primary/50 hover:text-primary active:scale-95 cursor-pointer"
-          >
-            Semua Lomba
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-
-      {/* ================= TAMPILAN DESKTOP: 1 Baris Slider (Horizontal Carousel) ================= */}
-      <div className="hidden md:block">
-        <div
-          ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto pb-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {items.map((competition, index) => {
-            // Kalkulasi lebar: 2 item di layar sedang (md), dan TEPAT 4 item pada 1 baris di layar desktop lebar (lg+)
-            return (
-              <div
-                key={competition.id}
-                className="group flex w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3*1.5rem)/4)] shrink-0 snap-start flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:border-primary/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/5"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative h-52 lg:h-56 overflow-hidden">
-                  <Image
-                    src={competition.image}
-                    alt={competition.name}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-extrabold uppercase tracking-[0.15em] text-primary truncate">
-                      {competition.categoryLabel}
-                    </span>
-                    <span className="flex items-center gap-1 text-xs font-semibold text-muted-foreground shrink-0">
-                      <Users className="h-3.5 w-3.5 text-primary/70" />
-                      {competition.countLabel}
-                      {competition.countSuffix}
-                    </span>
-                  </div>
-                  <h3 className="mt-3.5 text-xl font-bold tracking-tight text-foreground line-clamp-1 group-hover:text-primary transition-colors">
-                    {competition.name}
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground line-clamp-2">
-                    {competition.description}
-                  </p>
-                  <Button
-                    asChild
-                    className="mt-6 w-full rounded-2xl bg-[#ee2b2b] py-3.5 text-sm font-black text-white shadow-md shadow-red-500/20 transition-all duration-200 hover:bg-[#d42222] hover:scale-[1.02] active:scale-95 cursor-pointer"
-                  >
-                    <Link href={competition.href}>
-                      Daftar Lomba Ini
-                      <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ================= TAMPILAN MOBILE: Maksimal 4 Kartu + Tombol Lomba Lainnya ================= */}
-      <div className="md:hidden space-y-6">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {mobileItems.map((competition, index) => (
-            <div
-              key={competition.id}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-xs transition-all duration-300 active:scale-[0.99]"
+        {/* View Switcher & All Catalog Link */}
+        <div className="flex items-center gap-2 self-stretch sm:self-auto justify-between sm:justify-end">
+          <div className="flex items-center rounded-xl border border-border/80 bg-muted/40 p-1 text-xs font-bold">
+            <button
+              type="button"
+              onClick={() => setViewMode("carousel")}
+              aria-label="Tampilan korsel"
+              title="Tampilan korsel"
+              className={`rounded-lg px-2.5 py-1.5 transition-all cursor-pointer ${
+                viewMode === "carousel"
+                  ? "bg-card text-foreground shadow-2xs"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
-              <div className="relative h-52 overflow-hidden">
-                <Image
-                  src={competition.image}
-                  alt={competition.name}
-                  fill
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-primary">
-                    {competition.categoryLabel}
-                  </span>
-                  <span className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                    <Users className="h-3.5 w-3.5 text-primary/70" />
-                    {competition.countLabel}
-                    {competition.countSuffix}
-                  </span>
-                </div>
-                <h3 className="mt-3 text-lg font-bold tracking-tight text-foreground">
-                  {competition.name}
-                </h3>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground line-clamp-2">
-                  {competition.description}
-                </p>
-                <Button
-                  asChild
-                  className="mt-5 w-full rounded-xl bg-[#ee2b2b] py-3 text-xs font-black text-white shadow-sm transition-colors hover:bg-[#d42222] cursor-pointer"
-                >
-                  <Link href={competition.href}>
-                    Daftar Lomba
-                    <ArrowRight className="ml-1.5 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
+              <Columns3 className="h-3.5 w-3.5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("grid")}
+              aria-label="Tampilan petak"
+              title="Tampilan petak"
+              className={`rounded-lg px-2.5 py-1.5 transition-all cursor-pointer ${
+                viewMode === "grid"
+                  ? "bg-card text-foreground shadow-2xs"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <LayoutGrid className="h-3.5 w-3.5" />
+            </button>
+          </div>
 
-        {/* Tombol Semua Lomba menuju /daftar */}
-        <div className="pt-2">
           <Button
             asChild
-            className="h-14 w-full rounded-2xl border-2 border-[#ee2b2b] bg-[#ee2b2b]/10 hover:bg-[#ee2b2b] text-[#ee2b2b] hover:text-white px-6 text-sm font-black shadow-sm transition-all duration-300 active:scale-95 cursor-pointer"
+            variant="outline"
+            size="sm"
+            className="rounded-xl text-xs font-bold border-border/80 hover:border-primary/40 cursor-pointer"
           >
-            <Link href="/daftar" className="flex items-center justify-center gap-2">
-              <span>Semua Lomba</span>
-              <ArrowRight className="h-4 w-4" />
+            <Link href="/daftar">
+              Katalog Lengkap
+              <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
             </Link>
           </Button>
         </div>
       </div>
+
+      {/* Interactive Controls Bar: Filter Tabs & Live Search */}
+      <div className="mb-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        {/* Filter Pills */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <button
+            type="button"
+            onClick={() => setActiveFilter("ALL")}
+            className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all shrink-0 cursor-pointer ${
+              activeFilter === "ALL"
+                ? "bg-primary text-primary-foreground shadow-xs"
+                : "border border-border/80 bg-card text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            }`}
+          >
+            Semua ({items.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveFilter("SOLO")}
+            className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all shrink-0 cursor-pointer ${
+              activeFilter === "SOLO"
+                ? "bg-primary text-primary-foreground shadow-xs"
+                : "border border-border/80 bg-card text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            }`}
+          >
+            Perorangan
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveFilter("TEAM")}
+            className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all shrink-0 cursor-pointer ${
+              activeFilter === "TEAM"
+                ? "bg-primary text-primary-foreground shadow-xs"
+                : "border border-border/80 bg-card text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            }`}
+          >
+            Beregu (Tim)
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveFilter("CHILD")}
+            className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all shrink-0 cursor-pointer ${
+              activeFilter === "CHILD"
+                ? "bg-primary text-primary-foreground shadow-xs"
+                : "border border-border/80 bg-card text-muted-foreground hover:text-foreground hover:bg-muted/40"
+            }`}
+          >
+            Anak-anak
+          </button>
+        </div>
+
+        {/* Live Search Input */}
+        <div className="relative sm:w-64 shrink-0">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Cari nama lomba..."
+            className="w-full h-9 rounded-xl border border-border/80 bg-card pl-8 pr-3 text-xs font-medium text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
+      </div>
+
+      {/* Carousel Navigation Buttons (Visible when in carousel mode) */}
+      {viewMode === "carousel" && (
+        <div className="flex justify-end gap-1.5 mb-3 sm:hidden">
+          <button
+            type="button"
+            onClick={() => slide("left")}
+            disabled={!showLeftArrow}
+            aria-label="Geser ke kiri"
+            className={`flex h-8 w-8 items-center justify-center rounded-lg border border-border/80 bg-card text-foreground transition-all cursor-pointer ${
+              showLeftArrow ? "hover:border-primary/40 hover:bg-muted/50" : "opacity-30 cursor-not-allowed"
+            }`}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => slide("right")}
+            disabled={!showRightArrow}
+            aria-label="Geser ke kanan"
+            className={`flex h-8 w-8 items-center justify-center rounded-lg border border-border/80 bg-card text-foreground transition-all cursor-pointer ${
+              showRightArrow ? "hover:border-primary/40 hover:bg-muted/50" : "opacity-30 cursor-not-allowed"
+            }`}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+
+      {/* Empty State */}
+      {filteredItems.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-border/80 p-10 text-center text-muted-foreground space-y-2 bg-muted/15 my-4">
+          <p className="text-sm font-bold text-foreground">Tidak ada lomba yang sesuai</p>
+          <p className="text-xs max-w-sm mx-auto text-muted-foreground">
+            Coba ubah kata kunci pencarian atau ganti filter kategori lomba.
+          </p>
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="mt-2 text-xs font-bold text-primary hover:underline cursor-pointer"
+            >
+              Hapus pencarian
+            </button>
+          )}
+        </div>
+      ) : viewMode === "carousel" ? (
+        /* CAROUSEL VIEW */
+        <div className="relative">
+          {/* Desktop Carousel Navigation Overlays */}
+          <div className="hidden sm:block absolute -left-4 top-1/2 -translate-y-1/2 z-20">
+            <button
+              type="button"
+              onClick={() => slide("left")}
+              disabled={!showLeftArrow}
+              aria-label="Geser ke kiri"
+              className={`flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-card/90 shadow-md text-foreground transition-all cursor-pointer backdrop-blur-xs ${
+                showLeftArrow ? "hover:border-primary/40 hover:scale-105" : "opacity-0 pointer-events-none"
+              }`}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+          </div>
+          <div className="hidden sm:block absolute -right-4 top-1/2 -translate-y-1/2 z-20">
+            <button
+              type="button"
+              onClick={() => slide("right")}
+              disabled={!showRightArrow}
+              aria-label="Geser ke kanan"
+              className={`flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-card/90 shadow-md text-foreground transition-all cursor-pointer backdrop-blur-xs ${
+                showRightArrow ? "hover:border-primary/40 hover:scale-105" : "opacity-0 pointer-events-none"
+              }`}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {filteredItems.map((competition) => (
+              <CompetitionCard
+                key={competition.id}
+                competition={competition}
+                onOpenDetail={() => setSelectedCompetition(competition)}
+                className="w-[280px] sm:w-[320px] lg:w-[350px] shrink-0 snap-start"
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        /* GRID VIEW */
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredItems.map((competition) => (
+            <CompetitionCard
+              key={competition.id}
+              competition={competition}
+              onOpenDetail={() => setSelectedCompetition(competition)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Interactive Quick Detail Modal */}
+      {selectedCompetition && (
+        <Dialog open={!!selectedCompetition} onOpenChange={(open) => !open && setSelectedCompetition(null)}>
+          <DialogContent className="sm:max-w-md rounded-2xl p-6">
+            <DialogHeader>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-primary">
+                  {selectedCompetition.type === "TEAM" ? "Beregu (Tim)" : "Perorangan"}
+                </span>
+                <span className="text-xs font-semibold text-muted-foreground">
+                  {selectedCompetition.categoryLabel}
+                </span>
+              </div>
+              <DialogTitle className="text-xl font-black text-foreground">
+                {selectedCompetition.name}
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="space-y-4 pt-2 text-xs">
+              <p className="text-muted-foreground leading-relaxed">
+                {selectedCompetition.description}
+              </p>
+
+              {/* Status Pendaftaran & Kuota */}
+              <div className="rounded-xl border border-border/80 bg-muted/20 p-3.5 space-y-2">
+                <div className="flex items-center justify-between font-bold">
+                  <span className="text-foreground">Partisipasi Terdaftar</span>
+                  <span className="text-primary tabular-nums">
+                    {selectedCompetition.countLabel} {selectedCompetition.countSuffix}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                  <span>Gratis 100% tanpa dipungut biaya pendaftaran.</span>
+                </div>
+              </div>
+
+              {/* Fasilitas & Ketentuan */}
+              <div className="space-y-2">
+                <p className="font-bold text-foreground">Ketentuan Singkat:</p>
+                <ul className="space-y-1.5 text-muted-foreground list-disc list-inside">
+                  <li>Berdomisili di wilayah RW 10 (RT 01 sampai RT 08).</li>
+                  <li>Membawa E-Ticket digital saat check-in pada hari H.</li>
+                  <li>Hadir 15 menit sebelum nomor pertandingan dipanggil.</li>
+                </ul>
+              </div>
+
+              {/* Modal Actions */}
+              <div className="pt-2 flex items-center gap-2.5">
+                <Button
+                  asChild
+                  className="flex-1 rounded-xl bg-primary font-bold text-xs shadow-xs hover:bg-primary/90 cursor-pointer"
+                >
+                  <Link href={selectedCompetition.href}>
+                    Daftar Lomba Ini
+                    <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setSelectedCompetition(null)}
+                  className="rounded-xl text-xs font-semibold border-border/80 cursor-pointer"
+                >
+                  Tutup
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </section>
+  );
+}
+
+function CompetitionCard({
+  competition,
+  onOpenDetail,
+  className = "",
+}: {
+  competition: LandingCompetitionItem;
+  onOpenDetail: () => void;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`group flex flex-col overflow-hidden rounded-2xl border border-border/80 bg-card shadow-xs transition-all duration-200 hover:border-primary/40 hover:shadow-md ${className}`}
+    >
+      {/* Visual Header */}
+      <div className="relative h-44 sm:h-48 overflow-hidden">
+        <CompetitionVisual
+          name={competition.name}
+          categoryLabel={competition.categoryLabel}
+          type={competition.type}
+          image={competition.image}
+        />
+      </div>
+
+      {/* Card Content */}
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-center justify-between gap-2 text-xs">
+          <span className="font-bold text-primary truncate">
+            {competition.categoryLabel}
+          </span>
+          <span className="inline-flex items-center gap-1 font-semibold text-muted-foreground shrink-0">
+            <Users className="h-3.5 w-3.5 text-primary/70" />
+            {competition.countLabel} {competition.countSuffix}
+          </span>
+        </div>
+
+        <h3 className="mt-2 text-lg font-extrabold tracking-tight text-foreground transition-colors group-hover:text-primary">
+          {competition.name}
+        </h3>
+
+        <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2 leading-relaxed flex-1">
+          {competition.description}
+        </p>
+
+        {/* Card Interactive Actions */}
+        <div className="mt-5 pt-3.5 border-t border-border/50 flex items-center gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={onOpenDetail}
+            className="rounded-xl text-xs font-semibold border-border/80 hover:border-primary/40 hover:bg-muted/40 cursor-pointer"
+          >
+            <Info className="h-3.5 w-3.5 mr-1" />
+            Detail
+          </Button>
+
+          <Button
+            asChild
+            size="sm"
+            className="flex-1 rounded-xl bg-primary font-bold text-xs shadow-xs hover:bg-primary/90 cursor-pointer"
+          >
+            <Link href={competition.href}>
+              Daftar Sekarang
+              <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }
