@@ -85,52 +85,52 @@ export default async function BuktiPage({
         {/* ═══════════════════════════════════════ */}
         <div
           id="eticket-card"
-          className="overflow-hidden rounded-3xl border border-border/60 bg-card shadow-2xl shadow-black/10"
+          className="overflow-hidden rounded-2xl border border-border/80 bg-card shadow-lg"
         >
           {/* Header merah */}
-          <div className="relative bg-gradient-to-br from-[#ee2b2b] to-[#c01f1f] px-6 py-7 text-white overflow-hidden">
-            {/* Dekorasi lingkaran */}
-            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5" />
-            <div className="pointer-events-none absolute -bottom-6 left-12 h-24 w-24 rounded-full bg-white/5" />
+          <div className="relative bg-gradient-to-br from-primary via-[#B31724] to-[#8E0F1A] px-6 py-6 text-white overflow-hidden">
+            {/* Dekorasi halus */}
+            <div className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-white/5" />
+            <div className="pointer-events-none absolute -bottom-6 left-12 h-20 w-20 rounded-full bg-white/5" />
 
             <div className="relative flex items-start justify-between gap-4">
               <div>
-                <p className="mb-0.5 text-[10px] font-bold uppercase tracking-[0.25em] text-red-200">
-                  HUT RI KE-81 · RW 10 · AGUSTUSAN 2026
+                <p className="mb-0.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">
+                  HUT RI KE-81 &bull; RW 10 &bull; AGUSTUSAN 2026
                 </p>
-                <h1 className="text-2xl font-black leading-tight tracking-tight sm:text-3xl">
-                  E-Ticket Resmi
+                <h1 className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-white">
+                  E-Ticket Resmi Pendaftaran
                 </h1>
-                <p className="mt-1 text-sm font-medium text-red-100">
-                  Semarak 17-an Warga RW 10
+                <p className="mt-0.5 text-xs text-white/90">
+                  Semarak Kemerdekaan Warga RW 10
                 </p>
               </div>
-              <div className="shrink-0 rounded-2xl bg-white/15 p-2 backdrop-blur-sm ring-1 ring-white/20">
-                <Trophy className="h-8 w-8 text-yellow-300" />
+              <div className="shrink-0 rounded-xl bg-white/15 p-2 backdrop-blur-xs ring-1 ring-white/20">
+                <Trophy className="h-6 w-6 text-amber-300" />
               </div>
             </div>
 
             {/* Status badge */}
-            <div className="mt-5 flex items-center gap-2">
+            <div className="mt-4 flex items-center gap-2">
               <span
-                className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide ${
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${
                   isCheckedIn
-                    ? "bg-green-400/20 text-green-200 ring-1 ring-green-300/30"
+                    ? "bg-emerald-500/25 text-emerald-100 ring-1 ring-emerald-400/30"
                     : "bg-white/15 text-white ring-1 ring-white/20"
                 }`}
               >
-                <CheckCircle2 className="h-3.5 w-3.5" />
-                {isCheckedIn ? "Sudah Check-In" : "Terdaftar · Menunggu Check-In"}
+                <CheckCircle2 className="h-3 w-3" />
+                {isCheckedIn ? "Sudah Check-In" : "Terdaftar &bull; Menunggu Check-In"}
               </span>
             </div>
           </div>
 
           {/* Kode unik strip */}
-          <div className="flex items-center justify-between border-b border-dashed border-border/60 bg-muted/30 px-6 py-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-              Kode Pendaftaran
+          <div className="flex items-center justify-between border-b border-dashed border-border/70 bg-muted/40 px-6 py-2.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+              Kode Verifikasi
             </span>
-            <span className="text-lg font-black tracking-widest text-primary">
+            <span className="text-base font-black tracking-widest text-primary font-mono">
               {registration.publicCode}
             </span>
           </div>

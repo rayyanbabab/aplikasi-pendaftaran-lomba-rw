@@ -6,7 +6,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
-import { ArrowLeft, CheckCircle2, Sparkles, UserPlus, Trash2, PhoneCall, QrCode } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  PhoneCall,
+  QrCode,
+  Sparkles,
+  Trash2,
+  UserPlus,
+} from "lucide-react";
 
 import { submitRegistration } from "@/actions/registration";
 import { Button } from "@/components/ui/button";
@@ -113,91 +121,95 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
     startTransition(async () => {
       const result = await submitRegistration(values);
       if (!result.ok) {
-        toast.error(result.error || "Gagal menyimpan pendaftaran. Periksa kembali jaringan Anda.");
+        toast.error(result.error || "Gagal menyimpan pendaftaran. Periksa kembali form isian Anda.");
         return;
       }
-      toast.success("Pendaftaran berhasil! Mengarahkan menuju bukti tiket QR digital...");
+      toast.success("Pendaftaran berhasil! Menerbitkan E-Ticket QR Anda...");
       router.push(`/bukti/${("publicCode" in result ? (result as { publicCode?: string }).publicCode : "")}`);
     });
   };
 
   return (
-    <Card className="overflow-hidden rounded-3xl border border-border/80 bg-card shadow-lg dark:bg-card/95">
-      <CardHeader className="border-b border-border/60 bg-muted/20 pb-7 pt-8 px-6 sm:px-8 dark:bg-muted/10">
+    <Card className="overflow-hidden rounded-2xl border border-border/80 bg-card shadow-xs">
+      <CardHeader className="border-b border-border/60 bg-muted/20 p-6 sm:p-7">
         <div className="flex items-center justify-between gap-2 flex-wrap">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-primary">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-primary">
             <QrCode className="h-3.5 w-3.5" />
-            Registrasi Digital &middot; Tanpa Akun
+            Pendaftaran Mandiri &middot; Tanpa Akun
           </span>
-          <span className="text-[11px] font-extrabold text-muted-foreground tracking-widest uppercase">
-            HUT RI KE-81 &bull; RW 10
+          <span className="text-[10px] font-bold text-muted-foreground tracking-widest uppercase">
+            RW 10 &bull; Agustusan 2026
           </span>
         </div>
-        <CardTitle className="mt-3 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
-          Formulir Pendaftaran Resmi
+        <CardTitle className="mt-2 text-xl sm:text-2xl font-black tracking-tight text-foreground">
+          Formulir Pendaftaran Lomba
         </CardTitle>
-        <p className="mt-1.5 text-sm font-normal text-foreground/80 leading-relaxed">
-          Lengkapi data singkat di bawah ini. <strong className="text-foreground font-semibold">E-Ticket dan QR Code check-in</strong> akan langsung diterbitkan secara otomatis setelah formulir dikirim.
+        <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+          Silakan isi formulir di bawah ini. E-Ticket resmi beserta QR Code check-in akan diterbitkan langsung untuk disimpan.
         </p>
       </CardHeader>
       
-      <CardContent className="p-6 sm:p-8">
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-9">
+      <CardContent className="p-6 sm:p-7">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           
           {/* Section 1: Pengaturan Lomba & Kategori */}
           <div className="space-y-4">
-            <h3 className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-wider text-foreground">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#ee2b2b] text-white text-xs font-bold shadow-xs">1</span>
-              Jalur &amp; Kategori Kompetisi
-            </h3>
+            <div className="flex items-center gap-2 border-b border-border/50 pb-2">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-white text-[11px] font-bold">
+                1
+              </span>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                Kategori Pertandingan
+              </h3>
+            </div>
             
-            <div className="grid gap-5 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase tracking-wider text-foreground">Jenis Partisipasi</Label>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label className="text-xs font-bold text-foreground">Jenis Partisipasi</Label>
                 <Select
                   value={entryType}
                   onValueChange={(value) => form.setValue("entryType", value as "SOLO" | "TEAM")}
                   disabled={competition.type !== "BOTH"}
                 >
-                  <SelectTrigger className="h-13 rounded-2xl border-border bg-background px-4 text-sm font-medium text-foreground transition-colors duration-200 hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20">
+                  <SelectTrigger className="h-11 rounded-xl border-border bg-background px-3.5 text-xs font-medium text-foreground">
                     <SelectValue placeholder="Pilih jenis partisipasi" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="SOLO" className="font-medium">Individu / Solo (Perorangan)</SelectItem>
-                    <SelectItem value="TEAM" className="font-medium">Beregu / Tim (Kelompok)</SelectItem>
+                    <SelectItem value="SOLO" className="text-xs font-medium">Perorangan / Solo</SelectItem>
+                    <SelectItem value="TEAM" className="text-xs font-medium">Beregu / Tim</SelectItem>
                   </SelectContent>
                 </Select>
-                <p className="text-[11px] text-foreground/75">
+                <p className="text-[11px] text-muted-foreground">
                   {competition.type === "BOTH"
-                    ? "Lomba ini membuka jalur partisipasi individu maupun regu."
-                    : `Dikhususkan untuk pendaftaran kompetisi sistem ${competition.type === "TEAM" ? "Beregu (Tim)" : "Perorangan (Solo)"}.`}
+                    ? "Lomba ini dapat diikuti perorangan maupun beregu."
+                    : `Sistem pertandingan ${competition.type === "TEAM" ? "Beregu (Tim)" : "Perorangan (Solo)"}.`}
                 </p>
               </div>
 
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase tracking-wider text-foreground">Kelompok Usia Peserta</Label>
+              <div className="space-y-1.5">
+                <Label className="text-xs font-bold text-foreground">Kelompok Usia</Label>
                 <Select
                   value={form.watch("ageCategoryId")}
                   onValueChange={(value) => form.setValue("ageCategoryId", value)}
                 >
-                  <SelectTrigger className="h-13 rounded-2xl border-border bg-background px-4 text-sm font-medium text-foreground transition-colors duration-200 hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20">
+                  <SelectTrigger className="h-11 rounded-xl border-border bg-background px-3.5 text-xs font-medium text-foreground">
                     <SelectValue placeholder="Pilih kelompok usia" />
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map((category) => (
-                      <SelectItem key={category.id} value={String(category.id)} className="font-medium">
+                      <SelectItem key={category.id} value={String(category.id)} className="text-xs font-medium">
                         {category.name} ({category.ageMin}&ndash;{category.ageMax} Thn)
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
                 {suggestedCategory ? (
-                  <p className="animate-fade-in inline-flex items-center gap-1 text-[11px] font-bold text-green-600 dark:text-green-400">
-                    <Sparkles className="h-3.5 w-3.5 text-amber-500" />
-                    Dipilih otomatis: <span className="underline">{suggestedCategory.name}</span>
+                  <p className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                    <Sparkles className="h-3 w-3 text-amber-500" />
+                    Sesuai tanggal lahir: {suggestedCategory.name}
                   </p>
                 ) : (
-                  <p className="text-[11px] text-foreground/75">Isi tanggal lahir peserta agar kategori usia terisi otomatis.</p>
+                  <p className="text-[11px] text-muted-foreground">Kategori akan terdeteksi otomatis saat tanggal lahir diisi.</p>
                 )}
               </div>
             </div>
@@ -205,51 +217,60 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
 
           {/* Section 2: Data Kontak Penanggung Jawab */}
           <div className="space-y-4">
-            <h3 className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-wider text-foreground">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#ee2b2b] text-white text-xs font-bold shadow-xs">2</span>
-              Kontak Penanggung Jawab (PJ / Koordinator)
-            </h3>
-            <div className="grid gap-5 md:grid-cols-2 pt-1">
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase tracking-wider text-foreground">Nama Penanggung Jawab</Label>
+            <div className="flex items-center gap-2 border-b border-border/50 pb-2">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-white text-[11px] font-bold">
+                2
+              </span>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                Kontak Penanggung Jawab
+              </h3>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label className="text-xs font-bold text-foreground">Nama Penanggung Jawab (PJ)</Label>
                 <Input
-                  className="h-13 rounded-2xl bg-background text-sm font-medium px-4 text-foreground transition-colors duration-200 hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  className="h-11 rounded-xl bg-background text-xs font-medium px-3.5 text-foreground"
                   {...form.register("contactName")}
-                  placeholder="Nama lengkap aktif"
+                  placeholder="Contoh: Budi Santoso"
                 />
               </div>
-              <div className="space-y-2">
-                <Label className="text-xs font-bold uppercase tracking-wider text-foreground">Nomor WhatsApp Aktif</Label>
+              <div className="space-y-1.5">
+                <Label className="text-xs font-bold text-foreground">Nomor WhatsApp Aktif</Label>
                 <div className="relative">
                   <Input
-                    className="h-13 rounded-2xl bg-background text-sm font-medium pl-4 pr-11 text-foreground transition-colors duration-200 hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    className="h-11 rounded-xl bg-background text-xs font-medium pl-3.5 pr-10 text-foreground"
                     {...form.register("contactPhone")}
                     placeholder="Contoh: 081234567890"
                     type="tel"
                   />
-                  <PhoneCall className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <PhoneCall className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 </div>
               </div>
             </div>
-            <p className="text-xs text-foreground/80 font-medium pt-0.5">
-              *Nomor WhatsApp ini digunakan untuk menerima E-Ticket bukti pendaftaran dan pengingat jadwal dari panitia RW 10.
+            <p className="text-[11px] text-muted-foreground">
+              Nomor WhatsApp digunakan panitia untuk konfirmasi jadwal dan mengirimkan E-Ticket QR Code.
             </p>
           </div>
 
-          {/* Section 3: Data Daftar Peserta / Anggota */}
-          <div className="space-y-5">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-wider text-foreground">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#ee2b2b] text-white text-xs font-bold shadow-xs">3</span>
-                {entryType === "TEAM" ? `Daftar Personil Tim (Maks. ${competition.maxMembers} Orang)` : "Data Identitas Peserta"}
-              </h3>
+          {/* Section 3: Data Peserta / Anggota */}
+          <div className="space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/50 pb-2">
+              <div className="flex items-center gap-2">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-white text-[11px] font-bold">
+                  3
+                </span>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                  {entryType === "TEAM" ? `Personil Regu (Maks. ${competition.maxMembers} Orang)` : "Data Peserta Lomba"}
+                </h3>
+              </div>
               
               {entryType === "TEAM" && (
                 <Button
                   type="button"
                   size="sm"
-                  variant="secondary"
-                  className="rounded-full font-bold text-xs border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 px-4 py-2 transition-all"
+                  variant="outline"
+                  className="rounded-lg text-xs font-bold px-3 h-8"
                   onClick={() => {
                     if (fields.length < competition.maxMembers) {
                       append({ fullName: "", birthDate: "", role: "MEMBER" });
@@ -258,55 +279,52 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
                     }
                   }}
                 >
-                  <UserPlus className="mr-1.5 h-4 w-4" />
+                  <UserPlus className="mr-1 h-3.5 w-3.5" />
                   Tambah Anggota
                 </Button>
               )}
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {fields.map((field, index) => (
                 <div
                   key={field.id}
                   className={cn(
-                    "animate-fade-in-up rounded-3xl border p-5 sm:p-6 transition-all duration-200",
+                    "rounded-xl border p-4 sm:p-5 transition-all duration-200",
                     index === 0
-                      ? "border-primary/30 bg-gradient-to-br from-primary/5 via-transparent to-transparent shadow-xs dark:from-primary/15"
-                      : "border-border/80 bg-muted/20 dark:bg-muted/10"
+                      ? "border-primary/30 bg-primary/5"
+                      : "border-border/80 bg-muted/20"
                   )}
-                  style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="mb-4 flex items-center justify-between border-b border-border/60 pb-3.5">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-background px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-foreground shadow-xs">
-                      {index === 0 ? "👑 Ketua Tim / Peserta Utama" : `👤 Anggota Regu #${index + 1}`}
+                  <div className="mb-3 flex items-center justify-between border-b border-border/50 pb-2">
+                    <span className="text-[11px] font-bold text-foreground">
+                      {index === 0 ? "Ketua Regu / Peserta Utama" : `Anggota Regu #${index + 1}`}
                     </span>
                     {entryType === "TEAM" && index > 0 && (
-                      <Button
+                      <button
                         type="button"
-                        variant="ghost"
-                        size="sm"
-                        className="rounded-full text-red-500 hover:bg-red-500/10 hover:text-red-600 px-3 h-8 text-xs font-bold transition-colors"
+                        className="text-muted-foreground hover:text-destructive flex items-center gap-1 text-[11px] font-semibold cursor-pointer"
                         onClick={() => remove(index)}
                       >
-                        <Trash2 className="mr-1 h-3.5 w-3.5" />
+                        <Trash2 className="h-3.5 w-3.5" />
                         Hapus
-                      </Button>
+                      </button>
                     )}
                   </div>
                   
-                  <div className="grid gap-5 md:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label className="text-xs font-bold uppercase tracking-wider text-foreground">Nama Lengkap</Label>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-1.5">
+                      <Label className="text-xs font-bold text-foreground">Nama Lengkap</Label>
                       <Input
-                        className="h-13 rounded-2xl bg-background px-4 text-sm font-medium text-foreground transition-colors duration-200 hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="h-10 rounded-lg bg-background px-3 text-xs font-medium text-foreground"
                         {...form.register(`participants.${index}.fullName`)}
-                        placeholder="Nama sesuai KTP atau Kartu Keluarga"
+                        placeholder="Nama sesuai KTP / KK"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label className="text-xs font-bold uppercase tracking-wider text-foreground">Tanggal Lahir</Label>
+                    <div className="space-y-1.5">
+                      <Label className="text-xs font-bold text-foreground">Tanggal Lahir</Label>
                       <Input
-                        className="h-13 rounded-2xl bg-background px-4 text-sm font-medium text-foreground transition-colors duration-200 hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        className="h-10 rounded-lg bg-background px-3 text-xs font-medium text-foreground"
                         type="date"
                         {...form.register(`participants.${index}.birthDate`)}
                       />
@@ -326,27 +344,25 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
           />
 
           {/* Action Buttons */}
-          <div className="flex flex-col-reverse gap-4 pt-6 border-t border-border/60 sm:flex-row sm:justify-end">
+          <div className="flex flex-col-reverse gap-3 pt-4 border-t border-border/60 sm:flex-row sm:justify-end">
             <Button
               asChild
               type="button"
               variant="outline"
-              size="lg"
-              className="h-14 rounded-full border-border/80 bg-card px-8 font-bold text-foreground transition-colors hover:bg-muted sm:w-auto"
+              className="rounded-xl border-border/80 font-semibold text-xs h-11 px-5"
             >
               <Link href="/daftar">
-                <ArrowLeft className="mr-2 h-5 w-5" />
-                Batal &amp; Kembali
+                <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
+                Batal
               </Link>
             </Button>
             <Button
               type="submit"
-              size="lg"
               disabled={isPending}
-              className="h-14 w-full rounded-full bg-[#ee2b2b] px-10 text-base font-bold text-white shadow-lg shadow-red-500/25 transition-all duration-200 hover:bg-[#d42222] active:scale-[0.99] sm:flex-1"
+              className="rounded-xl bg-primary text-primary-foreground font-bold text-xs h-11 px-6 shadow-xs hover:bg-primary/90 cursor-pointer"
             >
-              {isPending ? "Sedang Menerbitkan Tiket QR..." : "Terbitkan E-Ticket QR Sekarang"}
-              <CheckCircle2 className="ml-2.5 h-5 w-5" />
+              {isPending ? "Sedang Menerbitkan Tiket..." : "Kirim & Dapatkan E-Ticket QR"}
+              <CheckCircle2 className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </form>

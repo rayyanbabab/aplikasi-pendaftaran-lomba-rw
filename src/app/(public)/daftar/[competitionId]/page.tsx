@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Trophy, Calendar, MapPin, ShieldCheck, Users, CheckCircle2 } from "lucide-react";
 
 import { RegisterForm } from "@/components/site/register-form";
+import { CompetitionVisual } from "@/components/site/competition-visual";
 import { db } from "@/db";
 import { ageCategories, competitions, events } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -37,107 +38,109 @@ export default async function RegisterPage({
   const isTeam = competition.type === "TEAM" || competition.type === "BOTH";
 
   return (
-    <div className="min-h-screen w-full py-10 md:py-16">
+    <div className="min-h-screen w-full py-8 md:py-12">
       <div className="mx-auto w-full max-w-[1150px] px-4 sm:px-6">
         
-        {/* Tombol Kembali yang Elegan & Konsisten */}
-        <div className="animate-fade-in mb-8">
+        {/* Tombol Kembali */}
+        <div className="mb-6">
           <Link
             href="/daftar"
-            className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-card px-5 py-2.5 text-sm font-bold text-foreground shadow-xs transition-all duration-200 hover:-translate-x-1 hover:border-primary/50 hover:text-primary dark:bg-card/80"
+            className="inline-flex items-center gap-2 rounded-xl border border-border/80 bg-card px-4 py-2 text-xs font-bold text-foreground shadow-2xs transition-colors hover:border-primary/40 hover:text-primary"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Kembali ke Semua Lomba
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Kembali ke Katalog Lomba
           </Link>
         </div>
 
-        {/* Desktop Split Layout: Sidebar Kiri (Info & Tips) + Konten Kanan (Form) */}
+        {/* Layout Grid: Sidebar Info + Form */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
           
-          {/* KOLOM KIRI: STICKY SIDEBAR INFO COMPACT & ELEGAN */}
-          <div className="animate-fade-in-up space-y-6 lg:col-span-5 lg:sticky lg:top-28">
+          {/* KOLOM KIRI: INFO LOMBA & KETENTUAN */}
+          <div className="space-y-6 lg:col-span-5 lg:sticky lg:top-24">
             
             {/* Kartu Utama Lomba */}
-            <div className="overflow-hidden rounded-3xl border border-border/80 bg-card shadow-lg transition-shadow duration-300 hover:shadow-xl">
-              <div className="festive-gradient bg-gradient-to-br from-[#d91c1c] via-[#ee2b2b] to-[#ff4c4c] p-6 text-white sm:p-8 relative overflow-hidden">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/20 px-3.5 py-1 text-[11px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
-                  <Trophy className="h-3.5 w-3.5" />
-                  {competition.type === "BOTH"
-                    ? "Individu / Beregu"
-                    : `Kategori ${competition.type === "TEAM" ? "Beregu (Tim)" : "Perorangan"}`}
-                </span>
-                <h1 className="mt-3.5 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-                  {competition.name}
-                </h1>
-                <p className="mt-2 text-xs text-white/90 font-normal leading-relaxed">
-                  Pendaftaran resmi perayaan HUT RI ke-81 di lingkungan RW 10. Kuota pendaftaran diatur demi ketertiban dan kemeriahan acara.
-                </p>
+            <div className="overflow-hidden rounded-2xl border border-border/80 bg-card shadow-xs">
+              <div className="relative h-44 overflow-hidden">
+                <CompetitionVisual
+                  name={competition.name}
+                  categoryLabel={categories[0]?.name ?? "Umum"}
+                  type={competition.type}
+                />
               </div>
 
-              <div className="p-6 space-y-5 text-sm bg-card">
-                <div className="flex items-center gap-3.5">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary dark:bg-primary/15">
-                    <Calendar className="h-5 w-5" />
+              <div className="p-6 space-y-4 text-xs bg-card">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                    {competition.type === "BOTH"
+                      ? "Individu / Beregu"
+                      : `Kategori ${competition.type === "TEAM" ? "Beregu (Tim)" : "Perorangan"}`}
                   </span>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Jadwal Acara</p>
-                    <p className="font-bold text-foreground text-sm mt-0.5">
-                      {event ? event.name : "17 Agustus 2026, 09:00 WIB"}
-                    </p>
-                  </div>
+                  <h1 className="mt-1 text-xl font-extrabold tracking-tight text-foreground sm:text-2xl">
+                    {competition.name}
+                  </h1>
                 </div>
 
-                <div className="flex items-center gap-3.5">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary dark:bg-primary/15">
-                    <MapPin className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Lokasi Perlombaan</p>
-                    <p className="font-bold text-foreground text-sm mt-0.5">
-                      {event ? event.location : "Jl. Pengasinan Tengah RW 10 (Masjid Nurul Huda)"}
-                    </p>
+                <div className="space-y-3 pt-2 border-t border-border/60">
+                  <div className="flex items-start gap-3">
+                    <Calendar className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-foreground">Jadwal Acara</p>
+                      <p className="text-muted-foreground">
+                        {event ? event.name : "17 Agustus 2026, 09:00 WIB"}
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-center gap-3.5">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary dark:bg-primary/15">
-                    <Users className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Ketentuan Personil</p>
-                    <p className="font-bold text-foreground text-sm mt-0.5">
-                      {isTeam ? `Min. ${competition.minMembers} - Maks. ${competition.maxMembers} Orang / Tim` : "1 Peserta (Individu / Solo)"}
-                    </p>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-foreground">Lokasi Pertandingan</p>
+                      <p className="text-muted-foreground">
+                        {event ? event.location : "Jl. Pengasinan Tengah RW 10"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <Users className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-foreground">Ketentuan Peserta</p>
+                      <p className="text-muted-foreground">
+                        {isTeam
+                          ? `Min. ${competition.minMembers} - Maks. ${competition.maxMembers} Orang / Tim`
+                          : "1 Peserta (Individu / Perorangan)"}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Kartu Tips & Ketentuan Cepat */}
-            <div className="rounded-3xl border border-border/80 bg-card p-6 shadow-xs">
-              <h3 className="flex items-center gap-2 text-xs font-extrabold text-foreground uppercase tracking-widest mb-4">
+            {/* Kartu Tips & Panduan Warga */}
+            <div className="rounded-2xl border border-border/80 bg-card p-5 shadow-xs">
+              <h3 className="flex items-center gap-2 text-xs font-bold text-foreground uppercase tracking-wider mb-3">
                 <ShieldCheck className="h-4 w-4 text-primary" />
-                Ketentuan Partisipasi Warga
+                Ketentuan Warga RW 10
               </h3>
-              <ul className="space-y-3 text-xs leading-relaxed text-foreground/80 font-normal">
-                <li className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-500 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Identitas Valid:</strong> Pastikan nama yang didaftarkan sesuai dengan data KTP atau Kartu Keluarga warga RW 10.</span>
+              <ul className="space-y-2.5 text-xs text-muted-foreground leading-relaxed">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-600 mt-0.5" />
+                  <span><strong>Identitas:</strong> Terbuka untuk warga RT 01 s/d RT 08 RW 10.</span>
                 </li>
-                <li className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-500 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">WhatsApp Aktif:</strong> Nomor WhatsApp aktif diperlukan untuk pengiriman E-Ticket digital dan informasi jadwal lomba.</span>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-600 mt-0.5" />
+                  <span><strong>WhatsApp Aktif:</strong> Diperlukan untuk pengiriman E-Ticket digital.</span>
                 </li>
-                <li className="flex items-start gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-500 mt-0.5" />
-                  <span><strong className="text-foreground font-semibold">Batas Partisipasi:</strong> Setiap warga dapat mendaftarkan diri maksimal pada 3 cabang perlombaan yang berbeda.</span>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-600 mt-0.5" />
+                  <span><strong>Bebas Biaya:</strong> Pendaftaran 100% gratis tanpa dipungut iuran apa pun.</span>
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* KOLOM KANAN: FORM PENDAFTARAN DINAMIS */}
-          <div className="animate-fade-in-up delay-100 lg:col-span-7">
+          {/* KOLOM KANAN: FORM PENDAFTARAN */}
+          <div className="lg:col-span-7">
             <RegisterForm
               competition={{
                 id: competition.id,
