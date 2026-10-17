@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, Eye, EyeOff, PartyPopper, ShieldAlert, Sparkles, UserCheck } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, ShieldAlert, ShieldCheck, UserCheck } from "lucide-react";
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
 
@@ -43,7 +43,7 @@ export function SetupAdminForm() {
         toast.error(result.error || "Gagal melakukan setup akun.");
         return;
       }
-      toast.success("✅ Akun Admin Utama berhasil didirikan!");
+      toast.success("Akun Admin Utama berhasil didirikan.");
       router.push("/portal");
       router.refresh();
     });
@@ -61,19 +61,17 @@ export function SetupAdminForm() {
       </div>
       <div className="relative hidden w-1/2 overflow-hidden bg-gradient-to-br from-[#ee2b2b] via-[#d91e1e] to-[#991414] lg:flex">
         <div
-          className={cn(
-            "absolute inset-0 bg-cover bg-center mix-blend-overlay",
-            isDark ? "opacity-35" : "opacity-30"
-          )}
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop')",
+              "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+            backgroundSize: "20px 20px",
           }}
         />
         <div className="relative z-10 flex w-full flex-col justify-between p-12 text-white">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 shadow-lg backdrop-blur-md">
-              <Sparkles className="h-5 w-5 text-yellow-300 animate-pulse" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 shadow-md backdrop-blur-md">
+              <ShieldCheck className="h-5 w-5 text-white" />
             </div>
             <div>
               <span className="text-2xl font-black tracking-tight block">Inisiasi Sistem RW 10</span>
@@ -111,8 +109,9 @@ export function SetupAdminForm() {
           </Link>
 
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-500 dark:text-amber-400 mb-2">
-              ⚡ Setup Akun Admin Utama
+            <div className="inline-flex items-center gap-1.5 rounded-lg bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-600 dark:text-amber-400 mb-2">
+              <ShieldAlert className="h-3.5 w-3.5" />
+              <span>Setup Akun Admin Utama</span>
             </div>
             <h2
               className={cn(
@@ -223,7 +222,7 @@ export function SetupAdminForm() {
                     : "bg-[#ee2b2b] text-white"
               )}
             >
-              {isPending ? "Sedang Mendaftarkan Akun..." : "Buat Akun Admin & Selesaikan Setup 🚀"}
+              {isPending ? "Sedang Mendaftarkan Akun..." : "Buat Akun Admin & Selesaikan Setup"}
             </button>
           </form>
 

@@ -33,7 +33,7 @@ export default async function AdminUsersPage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center p-6 text-center animate-fade-in-up">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-red-500/10 text-red-500 mb-6 shadow-xl ring-8 ring-red-500/5">
-          <ShieldX className="h-10 w-10 animate-pulse" />
+          <ShieldX className="h-10 w-10" />
         </div>
         <h1 className="text-3xl font-black tracking-tight">Akses Dibatasi Khusus Administrator</h1>
         <p className="mt-3 max-w-md text-base text-muted-foreground leading-relaxed">

@@ -11,7 +11,6 @@ import {
   CheckCircle2,
   PhoneCall,
   QrCode,
-  Sparkles,
   Trash2,
   UserPlus,
 } from "lucide-react";
@@ -204,8 +203,8 @@ export function RegisterForm({ competition, categories, eventDate }: RegisterFor
                   </SelectContent>
                 </Select>
                 {suggestedCategory ? (
-                  <p className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                    <Sparkles className="h-3 w-3 text-amber-500" />
+                  <p className="inline-flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                     Sesuai tanggal lahir: {suggestedCategory.name}
                   </p>
                 ) : (

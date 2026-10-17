@@ -5,7 +5,6 @@ import {
   Calendar,
   Clock,
   MapPin,
-  PartyPopper,
   Trophy,
   Users,
   Search,

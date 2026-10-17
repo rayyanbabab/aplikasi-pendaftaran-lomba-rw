@@ -12,14 +12,13 @@ import {
   LogOut, 
   PanelLeftClose, 
   PanelLeftOpen, 
-  PartyPopper, 
   ShieldAlert, 
   ShieldCheck,
   Calendar, 
   ChevronRight,
-  Flame,
   Camera,
   LayoutGrid,
+  Home,
   X
 } from "lucide-react";
 
@@ -53,35 +52,30 @@ export function AdminShell({
         subtext: "Pusat Kendali",
         href: "/portal",
         icon: LayoutDashboard,
-        color: "text-red-500 dark:text-red-400",
       },
       {
         title: "Daftar Lomba",
         subtext: "Kelola Pertandingan",
         href: "/portal/lomba",
         icon: Trophy,
-        color: "text-amber-500 dark:text-amber-400",
       },
       {
         title: "Data Pendaftaran",
         subtext: "Verifikasi Peserta",
         href: "/portal/pendaftaran",
         icon: ClipboardList,
-        color: "text-emerald-500 dark:text-emerald-400",
       },
       {
         title: "Check-in Lapangan",
         subtext: "Absensi & QR Scanner",
         href: "/portal/checkin",
         icon: QrCode,
-        color: "text-blue-500 dark:text-blue-400",
       },
       {
         title: "Galeri Acara",
         subtext: "Dokumentasi & Foto",
         href: "/portal/galeri",
         icon: Camera,
-        color: "text-purple-500 dark:text-purple-400",
       },
     ];
 
@@ -91,7 +85,6 @@ export function AdminShell({
         subtext: "Kelola Staf Panitia",
         href: "/portal/users",
         icon: UserCog,
-        color: "text-red-500 dark:text-red-400",
       });
     }
 
@@ -104,35 +97,30 @@ export function AdminShell({
       label: "Ringkasan",
       href: "/portal",
       icon: LayoutDashboard,
-      color: "text-red-500 dark:text-red-400",
       isAction: false,
     },
     {
-      label: "Lomba", // Diganti dari "Daftar"
+      label: "Lomba",
       href: "/portal/lomba",
       icon: Trophy,
-      color: "text-amber-500 dark:text-amber-400",
       isAction: false,
     },
     {
-      label: "Menu", // Tombol pusat pemicu Bottom Sheet
+      label: "Menu",
       href: "#menu",
       icon: LayoutGrid,
-      color: "text-purple-500 dark:text-purple-400",
       isAction: true,
     },
     {
-      label: "Peserta", // Diganti dari "Data"
+      label: "Peserta",
       href: "/portal/pendaftaran",
       icon: ClipboardList,
-      color: "text-emerald-500 dark:text-emerald-400",
       isAction: false,
     },
     {
-      label: "Scan", // Diganti dari "Check-in"
+      label: "Scan",
       href: "/portal/checkin",
       icon: QrCode,
-      color: "text-blue-500 dark:text-blue-400",
       isAction: false,
     },
   ], []);
@@ -165,8 +153,8 @@ export function AdminShell({
                     <Logo81 className="h-full w-full object-contain" />
                   </div>
                   <div className="flex flex-col truncate">
-                    <span className="text-base font-black tracking-tight text-foreground flex items-center gap-1">
-                      Semarak 17-an <Flame className="h-4 w-4 text-orange-500 fill-orange-500 animate-pulse shrink-0" />
+                    <span className="text-base font-black tracking-tight text-foreground">
+                      Semarak 17-an
                     </span>
                     <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">
                       RW 10
@@ -233,8 +221,8 @@ export function AdminShell({
                 >
                   <Icon
                     className={cn(
-                      "h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110",
-                      isActive ? "text-white" : item.color
+                      "h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-105",
+                      isActive ? "text-white" : "text-muted-foreground group-hover:text-foreground"
                     )}
                   />
                   {!isCollapsed && (
@@ -261,12 +249,12 @@ export function AdminShell({
               <>
                 <div
                   className={cn(
-                    "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-black text-white shadow-md transition-transform hover:scale-105",
-                    isAdmin ? "bg-gradient-to-tr from-[#ee2b2b] to-[#e01d1d] shadow-red-500/25" : "bg-gradient-to-tr from-orange-600 to-amber-500 shadow-orange-500/25"
+                    "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-black text-white shadow-xs",
+                    isAdmin ? "bg-primary" : "bg-neutral-800 text-white"
                   )}
                   title={session.user.name ?? session.user.email}
                 >
-                  {isAdmin ? "⚡" : "🛡️"}
+                  {isAdmin ? <ShieldAlert className="h-5 w-5 text-white" /> : <ShieldCheck className="h-5 w-5 text-white" />}
                 </div>
 
                 <div className="flex flex-1 flex-col truncate pr-1">
@@ -306,12 +294,12 @@ export function AdminShell({
               <div className="group relative flex h-10 w-10 shrink-0 items-center justify-center">
                 <div
                   className={cn(
-                    "flex h-full w-full items-center justify-center rounded-xl text-sm font-black text-white shadow-md transition-opacity duration-200 group-hover:opacity-0",
-                    isAdmin ? "bg-gradient-to-tr from-[#ee2b2b] to-[#e01d1d] shadow-red-500/25" : "bg-gradient-to-tr from-orange-600 to-amber-500 shadow-orange-500/25"
+                    "flex h-full w-full items-center justify-center rounded-xl text-sm font-black text-white shadow-xs transition-opacity duration-200 group-hover:opacity-0",
+                    isAdmin ? "bg-primary" : "bg-neutral-800 text-white"
                   )}
                   title={session.user.name ?? session.user.email}
                 >
-                  {isAdmin ? "⚡" : "🛡️"}
+                  {isAdmin ? <ShieldAlert className="h-5 w-5 text-white" /> : <ShieldCheck className="h-5 w-5 text-white" />}
                 </div>
                 <form action={adminSignOut} className="absolute inset-0">
                   <button
@@ -352,8 +340,8 @@ export function AdminShell({
               <Logo81 className="h-full w-full object-contain" />
             </div>
             <div className="flex flex-col truncate">
-              <span className="text-base font-black tracking-tight text-foreground flex items-center gap-1">
-                Semarak 17-an <Flame className="h-4 w-4 text-orange-500 fill-orange-500 animate-pulse shrink-0" />
+              <span className="text-base font-black tracking-tight text-foreground">
+                Semarak 17-an
               </span>
               <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">
                 RW 10
@@ -420,10 +408,10 @@ export function AdminShell({
                     <div
                       className={cn(
                         "flex h-11 w-11 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-105",
-                        isActive ? "bg-[#ee2b2b] text-white shadow-md shadow-primary/30" : "bg-background shadow-xs text-white dark:text-foreground"
+                        isActive ? "bg-primary text-white shadow-xs" : "bg-background shadow-xs text-foreground"
                       )}
                     >
-                      <Icon className={cn("h-5 w-5", !isActive && item.color)} />
+                      <Icon className={cn("h-5 w-5", isActive ? "text-white" : "text-muted-foreground")} />
                     </div>
                     <span className="text-xs tracking-tight line-clamp-1">
                       {item.title}
@@ -438,9 +426,10 @@ export function AdminShell({
               <Link
                 href="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex-1 flex items-center justify-center gap-2 h-12 rounded-2xl border border-[#2e2e2e]/80 dark:border-border/80 bg-background text-xs font-bold text-white dark:text-foreground hover:bg-muted transition-colors shadow-xs"
+                className="flex-1 flex items-center justify-center gap-2 h-12 rounded-2xl border border-border bg-background text-xs font-bold text-foreground hover:bg-muted transition-colors shadow-xs"
               >
-                🏠 Beranda Web
+                <Home className="h-4 w-4 text-primary" />
+                <span>Beranda Web</span>
               </Link>
               <form action={adminSignOut} className="flex-1 flex">
                 <button
@@ -481,11 +470,11 @@ export function AdminShell({
                   className={cn(
                     "flex h-9 w-9 items-center justify-center rounded-xl transition-all",
                     isActive
-                      ? "bg-gradient-to-tr from-[#ee2b2b] to-[#ff5e5e] text-white shadow-md shadow-primary/30"
-                      : "bg-transparent"
+                      ? "bg-primary text-white shadow-xs"
+                      : "bg-transparent text-muted-foreground"
                   )}
                 >
-                  <Icon className={cn("h-5 w-5", !isActive && item.color)} />
+                  <Icon className={cn("h-5 w-5", isActive ? "text-white" : "text-muted-foreground")} />
                 </div>
                 <span className="text-[10px] font-extrabold tracking-tight truncate max-w-[64px]">
                   {item.label}
@@ -502,19 +491,19 @@ export function AdminShell({
               className={cn(
                 "flex flex-1 flex-col items-center justify-center gap-1 py-1 px-0.5 rounded-xl transition-all duration-200",
                 isActive
-                  ? "text-white dark:text-primary font-black scale-105"
-                  : "text-white dark:text-muted-foreground hover:text-white dark:hover:text-foreground"
+                  ? "text-primary font-black"
+                  : "text-muted-foreground hover:text-foreground"
                 )}
             >
               <div
                 className={cn(
                   "flex h-9 w-9 items-center justify-center rounded-xl transition-all",
                   isActive
-                    ? "bg-gradient-to-tr from-[#ee2b2b] to-[#ff5e5e] text-white shadow-md shadow-primary/30"
-                    : "bg-transparent"
+                    ? "bg-primary text-white shadow-xs"
+                    : "bg-transparent text-muted-foreground"
                   )}
                 >
-                <Icon className={cn("h-5 w-5", !isActive && item.color)} />
+                <Icon className={cn("h-5 w-5", isActive ? "text-white" : "text-muted-foreground")} />
               </div>
               <span className="text-[10px] font-extrabold tracking-tight truncate max-w-[64px]">
                 {item.label}

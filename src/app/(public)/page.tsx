@@ -4,7 +4,6 @@ import {
   ChevronDown,
   HelpCircle,
   Medal,
-  PartyPopper,
   QrCode,
   ShieldCheck,
   Users,
@@ -289,7 +288,7 @@ export default async function LandingPage() {
         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-background p-8 sm:p-12 text-center">
           <div className="mx-auto max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary">
-              <PartyPopper className="h-3.5 w-3.5" />
+              <Medal className="h-3.5 w-3.5" />
               Semarak Kemerdekaan RI ke-81
             </div>
 

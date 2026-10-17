@@ -13,7 +13,6 @@ import {
   Link as LinkIcon, 
   Upload, 
   X, 
-  Sparkles, 
   Trophy, 
   Filter, 
   AlertTriangle 
@@ -186,13 +185,13 @@ export function AdminGalleryClient({
         setPreviewUrl(finalDataUrl);
 
         if (compressedBytes >= originalBytes && originalBytes <= TARGET_MAX_BYTES) {
-          toast.success(`✨ Foto sudah berukuran ringan (${finalSizeKB} KB / di bawah standar 300 KB) dan diunggah murni tanpa modifikasi!`);
+          toast.success(`Foto sudah berukuran ringan (${finalSizeKB} KB / di bawah standar 300 KB) dan diunggah murni tanpa modifikasi.`);
         } else if (originalBytes > 1024 * 500) {
-          toast.success(`✨ Foto besar (${originalSizeMB} MB) berhasil dipangkas ke ${finalSizeKB} KB (Hemat ${savedPct}%) dengan kualitas HD!`, { duration: 5000 });
+          toast.success(`Foto besar (${originalSizeMB} MB) berhasil dipangkas ke ${finalSizeKB} KB (Hemat ${savedPct}%) dengan kualitas HD.`, { duration: 5000 });
         } else if (compressedBytes < originalBytes) {
-          toast.success(`✨ Foto berhasil diredam dari ${originalSizeKB} KB menjadi ${finalSizeKB} KB! (Hemat ${savedPct}%)`);
+          toast.success(`Foto berhasil diredam dari ${originalSizeKB} KB menjadi ${finalSizeKB} KB (Hemat ${savedPct}%).`);
         } else {
-          toast.success(`✨ Foto siap diunggah pada ukuran optimal ${finalSizeKB} KB.`);
+          toast.success(`Foto siap diunggah pada ukuran optimal ${finalSizeKB} KB.`);
         }
       };
       img.src = event.target?.result as string;
@@ -335,7 +334,7 @@ export function AdminGalleryClient({
                   : "bg-card text-muted-foreground border-border hover:bg-muted hover:text-foreground"
               )}
             >
-              <Sparkles className="h-3 w-3 text-amber-500" />
+              <Camera className="h-3.5 w-3.5 opacity-80" />
               Momen Warga ({photos.filter((p) => p.competitionId === null).length})
             </button>
             {competitions.map((c) => {
@@ -402,7 +401,7 @@ export function AdminGalleryClient({
                             ? "bg-amber-500/20 text-amber-900 dark:text-amber-200 border-amber-500/40 bg-card/90"
                             : "bg-red-500/20 text-red-900 dark:text-red-200 border-red-500/40 bg-card/90"
                         )}>
-                          {isComp ? <Trophy className="h-3 w-3 inline text-amber-500" /> : <Sparkles className="h-3 w-3 inline text-[#ee2b2b]" />}
+                          {isComp ? <Trophy className="h-3 w-3 inline text-amber-500" /> : <Camera className="h-3 w-3 inline text-[#ee2b2b]" />}
                           <span>{photo.competitionName || "Momen Warga"}</span>
                         </span>
                       </div>
@@ -507,10 +506,10 @@ export function AdminGalleryClient({
                         onChange={(e) => setCompetitionId(e.target.value)}
                         className="h-11 w-full rounded-xl border border-border bg-white dark:bg-[#201919] px-3.5 text-sm font-medium text-foreground focus:border-[#ee2b2b] focus:outline-none focus:ring-2 focus:ring-red-500/20 cursor-pointer"
                       >
-                        <option value="general">✨ Umum / Momen Warga</option>
+                        <option value="general">Umum / Momen Warga</option>
                         {competitions.map((comp) => (
                           <option key={comp.id} value={String(comp.id)}>
-                            🏆 {comp.name} ({comp.type === "TEAM" ? "Regu" : "Individu"})
+                            {comp.name} ({comp.type === "TEAM" ? "Regu" : "Individu"})
                           </option>
                         ))}
                       </select>

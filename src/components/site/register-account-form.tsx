@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, Eye, EyeOff, UserPlus, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, UserPlus, ShieldCheck } from "lucide-react";
 import { useTheme } from "next-themes";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -66,22 +66,14 @@ export function RegisterAccountForm() {
       </div>
 
       {/* Left Branding Column */}
-      <div className="relative hidden w-1/2 overflow-hidden bg-primary lg:flex">
+      <div className="relative hidden w-1/2 overflow-hidden bg-gradient-to-br from-[#ee2b2b] via-[#d91e1e] to-[#991414] lg:flex">
         <div
-          className={cn(
-            "absolute inset-0 bg-cover bg-center",
-            isDark ? "opacity-40" : "opacity-35"
-          )}
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop')",
+              "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+            backgroundSize: "20px 20px",
           }}
-        />
-        <div
-          className={cn(
-            "absolute inset-0",
-            isDark ? "bg-gradient-to-t from-primary/90 to-transparent" : "bg-[#ee2b2b]/60"
-          )}
         />
         <div className="relative z-10 flex w-full flex-col justify-between p-12 text-white">
           <div className="flex items-center gap-3">

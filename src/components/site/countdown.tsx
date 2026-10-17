@@ -114,7 +114,7 @@ END:VCALENDAR`;
             <span
               suppressHydrationWarning
               className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight tabular-nums ${
-                item.isSeconds ? "text-primary animate-pulse" : "text-foreground"
+                item.isSeconds ? "text-primary" : "text-foreground"
               }`}
             >
               {pad(item.value)}

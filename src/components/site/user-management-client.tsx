@@ -12,7 +12,6 @@ import {
   Search, 
   Eye, 
   EyeOff, 
-  Sparkles, 
   Pencil, 
   X, 
   Check 
@@ -81,7 +80,7 @@ export function UserManagementClient({
         toast.error(result.error || "Gagal membuat akun.");
         return;
       }
-      toast.success(`🎉 Akun Panitia "${values.username.toLowerCase()}@RW10.id" berhasil didaftarkan!`);
+      toast.success(`Akun Panitia "${values.username.toLowerCase()}@RW10.id" berhasil didaftarkan.`);
       form.reset({ name: "", username: "", password: "", role: "PANITIA" });
       setShowForm(false);
     });
@@ -104,13 +103,13 @@ export function UserManagementClient({
         toast.error(res.error || "Gagal menyimpan pengeditan akun.");
         return;
       }
-      toast.success(`✅ Perubahan data pada akun ${editingUser?.name} berhasil disimpan ke database!`);
+      toast.success(`Perubahan data pada akun ${editingUser?.name} berhasil disimpan.`);
       setEditingUser(null);
     });
   };
 
   const handleDelete = (user: UserRecord) => {
-    if (!window.confirm(`⚠️ Yakin ingin menghapus permanen akun Panitia ${user.name} (${user.email})?`)) return;
+    if (!window.confirm(`Yakin ingin menghapus permanen akun Panitia ${user.name} (${user.email})?`)) return;
 
     setActiveActionId(user.id);
     startTransition(async () => {
@@ -155,7 +154,7 @@ export function UserManagementClient({
         <Card className="border-primary/20 bg-gradient-to-b from-card to-primary/5 shadow-xl animate-scale-in">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-xl font-bold">
-              <Sparkles className="h-5 w-5 text-primary" /> Daftarkan Anggota Panitia Baru
+              <UserPlus className="h-5 w-5 text-primary" /> Daftarkan Anggota Panitia Baru
             </CardTitle>
             <CardDescription>
               Cukup ketikian nama pendek panitia (Tanpa spasi). Sistem akan menyematkan akhiran @RW10.id secara otomatis.
@@ -222,10 +221,10 @@ export function UserManagementClient({
                   <label className="text-sm font-bold text-foreground">Hak Akses (Role)</label>
                   <div className="flex h-12 w-full items-center gap-2.5 rounded-xl border border-orange-500/30 bg-orange-500/10 px-4 text-sm font-black text-orange-700 dark:text-orange-300 shadow-xs">
                     <ShieldCheck className="h-5 w-5 shrink-0 text-orange-500" />
-                    <span>🛡️ PANITIA - (Satgas / Pengelola Lapangan)</span>
+                    <span>PANITIA (Satgas &amp; Pengelola Lapangan)</span>
                   </div>
                   <p className="text-[11px] font-medium text-muted-foreground">
-                    ⚡ Akun ADMIN bersifat tunggal (Anda). Staf yang didaftarkan di sini otomatis menjadi Panitia.
+                    Akun ADMIN bersifat tunggal (Anda). Staf yang didaftarkan di sini otomatis menjadi Panitia.
                   </p>
                 </div>
               </div>
@@ -244,7 +243,7 @@ export function UserManagementClient({
                   disabled={isPending}
                   className="rounded-xl bg-gradient-to-r from-[#ee2b2b] to-[#e01d1d] px-8 py-5 font-black text-white shadow-md shadow-primary/25 hover:from-[#e01d1d] hover:to-[#c91818] transition-all"
                 >
-                  {isPending ? "Sedang Mendaftarkan Akun..." : "Simpan & Aktifkan Panitia 🚀"}
+                  {isPending ? "Sedang Mendaftarkan Akun..." : "Simpan & Aktifkan Panitia"}
                 </Button>
               </div>
             </form>
@@ -451,7 +450,7 @@ export function UserManagementClient({
                         </button>
                       </div>
                       <p className="text-[11px] font-bold text-amber-600 dark:text-amber-400">
-                        ⚠️ Jika Anda mengisi kolom ini (min. 6 karakter), password lama akan langsung direset dengan yang baru.
+                        Perhatian: Jika Anda mengisi kolom ini (min. 6 karakter), password lama akan langsung direset dengan yang baru.
                       </p>
                       {editForm.formState.errors.password && (
                         <p className="text-xs font-semibold text-red-500">{editForm.formState.errors.password.message}</p>
@@ -472,7 +471,7 @@ export function UserManagementClient({
                         disabled={isPending}
                         className="rounded-xl bg-gradient-to-r from-[#ee2b2b] to-[#e01d1d] px-6 py-5 font-bold text-white shadow-md shadow-primary/25 hover:from-[#e01d1d] hover:to-[#c91818] transition-all active:scale-[0.98]"
                       >
-                        {isPending ? "Sedang Menyimpan..." : "Simpan Perubahan 💾"}
+                        {isPending ? "Sedang Menyimpan..." : "Simpan Perubahan"}
                       </Button>
                     </div>
                   </form>

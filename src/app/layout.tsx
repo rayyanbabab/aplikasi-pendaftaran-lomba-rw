@@ -48,12 +48,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        />
-      </head>
       <body className={`${plusJakarta.variable} font-sans`}>
         <ThemeProvider>
           <PwaRegister />

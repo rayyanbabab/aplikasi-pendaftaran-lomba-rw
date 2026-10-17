@@ -35,7 +35,7 @@ export function InteractiveHero() {
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12]">
               Pesta Rakyat &amp;{" "}
-              <span className="text-red-400 underline decoration-red-500/50 decoration-wavy decoration-2">
+              <span className="text-red-400">
                 Lomba Kemerdekaan
               </span>
               <br />
